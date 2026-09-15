@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  --color-brand: #1a2e22;
+  --color-brand-dark: #101d15;
+  --color-gold: #c8a84b;
+  --color-gold-dark: #a98a34;
+  --font-heading: "Lora", serif;
+  --font-body: "Nunito Sans", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}

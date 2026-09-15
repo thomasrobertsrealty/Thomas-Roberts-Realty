@@ -2,18 +2,14 @@ export const SITE = {
   url: 'https://thomasrobertsrealty.co',
   agentName: 'Thomas Roberts',
   brokerage: 'Silvercreek Realty Group',
-  // TODO: replace with real contact details before launch
-  phone: '(208) 555-0134',
-  phoneRaw: '+12085550134',
-  email: 'thomas@thomasrobertsrealty.co',
-  licenseNumber: 'Idaho Real Estate License # [ADD YOUR LICENSE NUMBER]',
+  phone: '(208) 709-1790',
+  phoneRaw: '+12087091790',
+  email: 'ThomasRobertsRealty@gmail.com',
+  // TODO: add your Idaho real estate license number
+  licenseNumber: 'Licensed Idaho Real Estate Agent',
   addressLocality: 'Idaho Falls',
   addressRegion: 'ID',
-  social: {
-    facebook: 'https://www.facebook.com/[ADD YOUR HANDLE]',
-    instagram: 'https://www.instagram.com/[ADD YOUR HANDLE]',
-    linkedin: 'https://www.linkedin.com/in/[ADD YOUR HANDLE]',
-  },
+  tagline: 'Real Estate Done Right in Southeast Idaho',
 }
 
 export const AREAS = [
@@ -21,13 +17,7 @@ export const AREAS = [
     slug: 'idaho-falls',
     name: 'Idaho Falls',
     blurb:
-      'The commercial and cultural hub of Southeast Idaho, Idaho Falls offers a mix of established riverside neighborhoods, new-build subdivisions, and a growing downtown core. A strong choice for buyers who want walkable amenities alongside easy access to the Snake River Greenbelt.',
-  },
-  {
-    slug: 'pocatello',
-    name: 'Pocatello',
-    blurb:
-      'Home to Idaho State University, Pocatello combines historic character in neighborhoods like Alameda and Bench with affordable family housing and a steady rental market for investors.',
+      'The commercial and cultural hub of Southeast Idaho, Idaho Falls offers a mix of established riverside neighborhoods, new-build subdivisions, and a growing downtown core along the Snake River Greenbelt.',
   },
   {
     slug: 'rexburg',
@@ -36,22 +26,28 @@ export const AREAS = [
       'Anchored by BYU-Idaho, Rexburg is one of the fastest-growing markets in the region, with strong demand for both single-family homes and student/investment rental properties.',
   },
   {
+    slug: 'rigby',
+    name: 'Rigby',
+    blurb:
+      'A quieter, family-oriented community northeast of Idaho Falls, Rigby offers more land per dollar and easy access to the Snake River and Yellowstone Highway.',
+  },
+  {
     slug: 'ammon',
     name: 'Ammon',
     blurb:
       'A fast-growing suburb of Idaho Falls, Ammon is popular with families looking for newer construction, larger lots, and top-rated schools just minutes from the city.',
   },
   {
+    slug: 'shelley',
+    name: 'Shelley',
+    blurb:
+      'A close-knit small town south of Idaho Falls, Shelley appeals to buyers wanting a slower pace, larger lots, and a strong sense of community within easy commuting distance.',
+  },
+  {
     slug: 'blackfoot',
     name: 'Blackfoot',
     blurb:
-      'A more affordable entry point into the Southeast Idaho market, Blackfoot appeals to first-time buyers and those looking for acreage and a slower pace of life within commuting distance of Idaho Falls and Pocatello.',
-  },
-  {
-    slug: 'chubbuck',
-    name: 'Chubbuck',
-    blurb:
-      'A quiet residential community next to Pocatello, Chubbuck is known for family-friendly neighborhoods, parks, and easy access to I-15 for regional commuters.',
+      'A more affordable entry point into the Southeast Idaho market, Blackfoot appeals to first-time buyers and those looking for acreage within commuting distance of Idaho Falls.',
   },
 ]
 
@@ -63,5 +59,4 @@ export const NAV_LINKS = [
   { href: '/areas', label: 'Areas Served' },
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/faq', label: 'FAQ' },
-  { href: '/contact', label: 'Contact' },
 ]

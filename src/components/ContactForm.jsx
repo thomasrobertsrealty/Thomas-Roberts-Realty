@@ -37,7 +37,7 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <p className="rounded-md bg-emerald-50 p-4 text-emerald-800" role="status">
+      <p className="rounded-md bg-gold/10 p-4 text-brand" role="status">
         Thanks, {submittedName || 'there'}! Your message has been sent — Thomas will be in touch
         soon.
       </p>
@@ -57,7 +57,7 @@ export default function ContactForm() {
           required
           value={form.name}
           onChange={handleChange}
-          className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+          className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
         />
       </div>
       <div>
@@ -71,7 +71,7 @@ export default function ContactForm() {
           required
           value={form.email}
           onChange={handleChange}
-          className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+          className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
         />
       </div>
       <div>
@@ -84,7 +84,7 @@ export default function ContactForm() {
           type="tel"
           value={form.phone}
           onChange={handleChange}
-          className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+          className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
         />
       </div>
       <div>
@@ -97,7 +97,7 @@ export default function ContactForm() {
           rows={4}
           value={form.message}
           onChange={handleChange}
-          className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-emerald-600 focus:outline-none focus:ring-1 focus:ring-emerald-600"
+          className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
         />
       </div>
 
@@ -110,7 +110,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="rounded-md bg-emerald-700 px-5 py-2.5 font-medium text-white hover:bg-emerald-800 disabled:opacity-60"
+        className="rounded-md bg-gold px-5 py-2.5 font-medium text-brand-dark hover:bg-gold-dark disabled:opacity-60"
       >
         {status === 'submitting' ? 'Sending…' : 'Send message'}
       </button>

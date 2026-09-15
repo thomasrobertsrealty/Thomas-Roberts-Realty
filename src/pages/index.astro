@@ -1,65 +1,113 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { SITE, AREAS } from '../lib/site.js'
+
+const steps = [
+  {
+    title: 'Tell Me Your Goal',
+    body: "Selling, buying, or just curious about your home's value — fill out the form that fits your situation. Takes about 60 seconds.",
+  },
+  {
+    title: 'Get Real Information',
+    body: "You'll receive a personalized neighborhood market report from Thomas within 24 hours — real data, no automated estimates.",
+  },
+  {
+    title: 'Move Forward, Your Way',
+    body: 'No pressure, no obligation. Thomas will walk you through your options and let you decide what makes sense for your situation.',
+  },
+]
 ---
 
 <Layout
   title="Southeast Idaho Real Estate Agent"
-  description={`${SITE.agentName} is a Southeast Idaho real estate agent with ${SITE.brokerage}, helping buyers and sellers in Idaho Falls, Pocatello, Rexburg, and surrounding communities.`}
+  description={`${SITE.agentName} is a Southeast Idaho real estate agent with ${SITE.brokerage}, helping buyers and sellers in Idaho Falls, Rexburg, Rigby, Ammon, Shelley, and Blackfoot.`}
 >
-  <section class="mx-auto max-w-5xl px-6 py-16 text-center">
-    <h1 class="text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl">
-      Southeast Idaho real estate, handled by a local agent
-    </h1>
-    <p class="mx-auto mt-5 max-w-2xl text-lg text-stone-600">
-      {SITE.agentName} helps buyers and sellers across Idaho Falls, Pocatello, Rexburg, Ammon,
-      Blackfoot, and Chubbuck navigate the Southeast Idaho market with {SITE.brokerage}.
-    </p>
-    <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <a
-        href="/contact"
-        class="rounded-md bg-emerald-700 px-6 py-3 font-medium text-white hover:bg-emerald-800"
-      >
-        Start a conversation
-      </a>
-      <a
-        href="/areas"
-        class="rounded-md border border-stone-300 px-6 py-3 font-medium text-stone-700 hover:border-emerald-700 hover:text-emerald-700"
-      >
-        See areas served
-      </a>
+  <section class="bg-brand py-20 text-center text-white">
+    <div class="mx-auto max-w-2xl px-6">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+        Southeast Idaho Real Estate
+      </p>
+      <h1 class="mt-4 font-heading text-4xl leading-tight sm:text-5xl">
+        Real Estate Done Right<br />
+        in <em class="font-heading font-medium not-italic text-gold italic">Southeast Idaho</em>
+      </h1>
+      <p class="mx-auto mt-6 max-w-xl text-stone-200">
+        Whether you're ready to sell, searching for your next home, or just want to know what
+        your property is worth — {SITE.agentName} is here to help.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a
+          href="/sellers"
+          class="rounded-md bg-gold px-6 py-3 font-semibold text-brand-dark hover:bg-gold-dark"
+        >
+          Get a Free Home Valuation
+        </a>
+        <a
+          href="/buyers"
+          class="rounded-md border border-white/40 px-6 py-3 font-semibold text-white hover:border-white"
+        >
+          Start Your Home Search
+        </a>
+      </div>
+      <p class="mt-8 text-sm text-stone-300">
+        {AREAS.map((a) => a.name).join(' · ')} & Surrounding Areas
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">
+        Simple Process
+      </p>
+      <h2 class="mt-2 text-center font-heading text-2xl text-brand sm:text-3xl">
+        How Working With {SITE.agentName} Actually Works
+      </h2>
+      <div class="mt-10 grid gap-8 sm:grid-cols-3">
+        {
+          steps.map((step, i) => (
+            <div>
+              <span class="font-heading text-3xl text-gold">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="mt-2 font-semibold text-stone-900">{step.title}</h3>
+              <p class="mt-2 text-sm text-stone-600">{step.body}</p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <section class="bg-stone-50 py-16">
     <div class="mx-auto grid max-w-5xl gap-8 px-6 sm:grid-cols-3">
       <div>
-        <h2 class="text-lg font-semibold text-stone-900">Buying a home</h2>
+        <h2 class="font-heading text-lg text-brand">Buying a home</h2>
         <p class="mt-2 text-sm text-stone-600">
           A clear, guided process from pre-approval to closing — with local market knowledge that
           helps you make a confident offer.
         </p>
-        <a href="/buyers" class="mt-3 inline-block text-sm font-medium text-emerald-700"
+        <a href="/buyers" class="mt-3 inline-block text-sm font-medium text-gold-dark"
           >Learn about buying &rarr;</a
         >
       </div>
       <div>
-        <h2 class="text-lg font-semibold text-stone-900">Selling a home</h2>
+        <h2 class="font-heading text-lg text-brand">Selling a home</h2>
         <p class="mt-2 text-sm text-stone-600">
           Strategic pricing, targeted marketing, and hands-on negotiation to get your home sold on
           your timeline.
         </p>
-        <a href="/sellers" class="mt-3 inline-block text-sm font-medium text-emerald-700"
+        <a href="/sellers" class="mt-3 inline-block text-sm font-medium text-gold-dark"
           >Learn about selling &rarr;</a
         >
       </div>
       <div>
-        <h2 class="text-lg font-semibold text-stone-900">Local expertise</h2>
+        <h2 class="font-heading text-lg text-brand">Local expertise</h2>
         <p class="mt-2 text-sm text-stone-600">
           Southeast Idaho is home &mdash; from Idaho Falls neighborhoods to Rexburg's growing
           subdivisions.
         </p>
-        <a href="/about" class="mt-3 inline-block text-sm font-medium text-emerald-700"
+        <a href="/about" class="mt-3 inline-block text-sm font-medium text-gold-dark"
           >About {SITE.agentName} &rarr;</a
         >
       </div>
@@ -67,7 +115,7 @@ import { SITE, AREAS } from '../lib/site.js'
   </section>
 
   <section class="mx-auto max-w-5xl px-6 py-16">
-    <h2 class="text-2xl font-semibold text-stone-900">Areas served</h2>
+    <h2 class="font-heading text-2xl text-brand">Areas served</h2>
     <div class="mt-6 grid gap-6 sm:grid-cols-2">
       {
         AREAS.map((area) => (
@@ -80,15 +128,15 @@ import { SITE, AREAS } from '../lib/site.js'
     </div>
   </section>
 
-  <section class="bg-stone-50 py-16">
+  <section class="bg-brand py-16 text-white">
     <div class="mx-auto max-w-3xl px-6 text-center">
-      <h2 class="text-2xl font-semibold text-stone-900">Have a question?</h2>
-      <p class="mt-2 text-stone-600">
+      <h2 class="font-heading text-2xl">Have a question?</h2>
+      <p class="mt-2 text-stone-200">
         Read answers to common buyer and seller questions, or reach out directly.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-4">
-        <a href="/faq" class="text-sm font-medium text-emerald-700">Browse the FAQ &rarr;</a>
-        <a href="/contact" class="text-sm font-medium text-emerald-700">Contact {SITE.agentName} &rarr;</a>
+        <a href="/faq" class="text-sm font-medium text-gold">Browse the FAQ &rarr;</a>
+        <a href="/contact" class="text-sm font-medium text-gold">Contact {SITE.agentName} &rarr;</a>
       </div>
     </div>
   </section>
