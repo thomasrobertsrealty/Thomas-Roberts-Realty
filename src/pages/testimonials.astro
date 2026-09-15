@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { SITE } from '../lib/site.js'
+
+// TODO: Replace every placeholder below with a real client testimonial before launch.
+// Do not publish these as-is — they are structural placeholders, not real reviews.
+const placeholders = [1, 2, 3]
+---
+
+<Layout
+  title="Testimonials"
+  description={`Client testimonials for ${SITE.agentName}, real estate agent with ${SITE.brokerage} in Southeast Idaho.`}
+>
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="text-3xl font-bold text-stone-900">What clients say</h1>
+    <p class="mt-4 text-stone-600">
+      [TODO: This page needs real client testimonials. Reach out to past clients for a short
+      quote and permission to use their name — genuine reviews are far more persuasive, to
+      readers and to AI systems evaluating trustworthiness, than generic copy.]
+    </p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-1">
+      {
+        placeholders.map((n) => (
+          <blockquote class="rounded-lg border border-dashed border-stone-300 p-6 text-stone-500">
+            <p>"[Add a short quote about the client's experience working with {SITE.agentName}.]"</p>
+            <footer class="mt-3 text-sm font-medium">
+              — [Client name], [Buyer or Seller] in [City]
+            </footer>
+          </blockquote>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

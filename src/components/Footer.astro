@@ -1,0 +1,36 @@
+---
+import { SITE, NAV_LINKS } from '../lib/site.js'
+const year = new Date().getFullYear()
+---
+
+<footer class="mt-16 border-t border-stone-200 bg-stone-50">
+  <div class="mx-auto grid max-w-5xl gap-8 px-6 py-10 text-sm text-stone-600 sm:grid-cols-3">
+    <div>
+      <p class="font-semibold text-stone-900">{SITE.agentName}</p>
+      <p>{SITE.brokerage}</p>
+      <p class="mt-2">{SITE.licenseNumber}</p>
+    </div>
+    <div>
+      <p class="font-semibold text-stone-900">Contact</p>
+      <p><a href={`tel:${SITE.phoneRaw}`} class="hover:text-emerald-700">{SITE.phone}</a></p>
+      <p><a href={`mailto:${SITE.email}`} class="hover:text-emerald-700">{SITE.email}</a></p>
+    </div>
+    <div>
+      <p class="font-semibold text-stone-900">Site</p>
+      <ul class="mt-1 space-y-1">
+        {
+          NAV_LINKS.map((link) => (
+            <li>
+              <a href={link.href} class="hover:text-emerald-700">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-stone-200 px-6 py-4 text-center text-xs text-stone-500">
+    &copy; {year} {SITE.agentName} &mdash; {SITE.brokerage}. Serving Southeast Idaho.
+  </div>
+</footer>

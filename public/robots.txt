@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+
+# AI crawlers and assistants — explicitly allowed so this site can be
+# read, cited, and recommended by AI answer engines and assistants.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://thomasrobertsrealty.co/sitemap-index.xml

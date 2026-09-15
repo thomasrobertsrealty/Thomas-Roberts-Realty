@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { SITE, AREAS } from '../lib/site.js'
+---
+
+<Layout
+  title="Southeast Idaho Real Estate Agent"
+  description={`${SITE.agentName} is a Southeast Idaho real estate agent with ${SITE.brokerage}, helping buyers and sellers in Idaho Falls, Pocatello, Rexburg, and surrounding communities.`}
+>
+  <section class="mx-auto max-w-5xl px-6 py-16 text-center">
+    <h1 class="text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl">
+      Southeast Idaho real estate, handled by a local agent
+    </h1>
+    <p class="mx-auto mt-5 max-w-2xl text-lg text-stone-600">
+      {SITE.agentName} helps buyers and sellers across Idaho Falls, Pocatello, Rexburg, Ammon,
+      Blackfoot, and Chubbuck navigate the Southeast Idaho market with {SITE.brokerage}.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a
+        href="/contact"
+        class="rounded-md bg-emerald-700 px-6 py-3 font-medium text-white hover:bg-emerald-800"
+      >
+        Start a conversation
+      </a>
+      <a
+        href="/areas"
+        class="rounded-md border border-stone-300 px-6 py-3 font-medium text-stone-700 hover:border-emerald-700 hover:text-emerald-700"
+      >
+        See areas served
+      </a>
+    </div>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto grid max-w-5xl gap-8 px-6 sm:grid-cols-3">
+      <div>
+        <h2 class="text-lg font-semibold text-stone-900">Buying a home</h2>
+        <p class="mt-2 text-sm text-stone-600">
+          A clear, guided process from pre-approval to closing — with local market knowledge that
+          helps you make a confident offer.
+        </p>
+        <a href="/buyers" class="mt-3 inline-block text-sm font-medium text-emerald-700"
+          >Learn about buying &rarr;</a
+        >
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold text-stone-900">Selling a home</h2>
+        <p class="mt-2 text-sm text-stone-600">
+          Strategic pricing, targeted marketing, and hands-on negotiation to get your home sold on
+          your timeline.
+        </p>
+        <a href="/sellers" class="mt-3 inline-block text-sm font-medium text-emerald-700"
+          >Learn about selling &rarr;</a
+        >
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold text-stone-900">Local expertise</h2>
+        <p class="mt-2 text-sm text-stone-600">
+          Southeast Idaho is home &mdash; from Idaho Falls neighborhoods to Rexburg's growing
+          subdivisions.
+        </p>
+        <a href="/about" class="mt-3 inline-block text-sm font-medium text-emerald-700"
+          >About {SITE.agentName} &rarr;</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <h2 class="text-2xl font-semibold text-stone-900">Areas served</h2>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2">
+      {
+        AREAS.map((area) => (
+          <div class="rounded-lg border border-stone-200 p-5">
+            <h3 class="font-semibold text-stone-900">{area.name}, Idaho</h3>
+            <p class="mt-1 text-sm text-stone-600">{area.blurb}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <h2 class="text-2xl font-semibold text-stone-900">Have a question?</h2>
+      <p class="mt-2 text-stone-600">
+        Read answers to common buyer and seller questions, or reach out directly.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a href="/faq" class="text-sm font-medium text-emerald-700">Browse the FAQ &rarr;</a>
+        <a href="/contact" class="text-sm font-medium text-emerald-700">Contact {SITE.agentName} &rarr;</a>
+      </div>
+    </div>
+  </section>
+</Layout>

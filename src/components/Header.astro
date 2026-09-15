@@ -1,0 +1,33 @@
+---
+import { NAV_LINKS, SITE } from '../lib/site.js'
+const currentPath = Astro.url.pathname
+---
+
+<header class="border-b border-stone-200 bg-white">
+  <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+    <a href="/" class="text-lg font-semibold tracking-tight text-stone-900">
+      {SITE.agentName}
+      <span class="block text-xs font-normal uppercase tracking-wide text-stone-500">
+        {SITE.brokerage}
+      </span>
+    </a>
+    <nav aria-label="Primary" class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+      {
+        NAV_LINKS.map((link) => {
+          const active = currentPath === link.href
+          return (
+            <a
+              href={link.href}
+              aria-current={active ? 'page' : undefined}
+              class={`transition-colors hover:text-emerald-700 ${
+                active ? 'font-semibold text-emerald-700' : 'text-stone-600'
+              }`}
+            >
+              {link.label}
+            </a>
+          )
+        })
+      }
+    </nav>
+  </div>
+</header>

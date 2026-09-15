@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro'
+import JsonLd from '../components/JsonLd.astro'
+import { SITE } from '../lib/site.js'
+
+const faqs = [
+  {
+    q: 'What areas of Southeast Idaho do you serve?',
+    a: `${SITE.agentName} works with buyers and sellers throughout Southeast Idaho, including Idaho Falls, Pocatello, Rexburg, Ammon, Blackfoot, and Chubbuck.`,
+  },
+  {
+    q: 'How much does it cost to work with a buyer\'s agent?',
+    a: 'In most transactions, the seller pays the buyer\'s agent commission as part of the sale, so there is typically no direct out-of-pocket cost to the buyer. Exact terms are outlined in a buyer representation agreement before touring homes.',
+  },
+  {
+    q: 'How long does it take to sell a home in Southeast Idaho?',
+    a: 'Time on market varies by city, price point, and season, but a well-priced, well-marketed home in the Southeast Idaho market often receives offers within the first few weeks of listing. A free home valuation can give a more specific estimate for your property.',
+  },
+  {
+    q: 'Do I need to be pre-approved before touring homes?',
+    a: 'It is strongly recommended. A pre-approval letter from a lender clarifies your budget and makes any offer you submit significantly more competitive in a multiple-offer situation.',
+  },
+  {
+    q: 'What is my home worth right now?',
+    a: `The most accurate answer comes from an in-person walkthrough and a comparative market analysis of recent, truly comparable sales nearby. Online automated estimates are frequently off by a meaningful margin. Contact ${SITE.agentName} for a free, no-obligation valuation.`,
+  },
+  {
+    q: 'Do you work with first-time homebuyers?',
+    a: 'Yes. First-time buyers get a full walkthrough of the process, from pre-approval through closing, with plain-language explanations at every step.',
+  },
+  {
+    q: 'Can you help with relocation to Southeast Idaho?',
+    a: 'Yes. Out-of-area and out-of-state buyers relocating for work, family, or lifestyle reasons receive additional guidance on neighborhoods, schools, and commute considerations specific to Southeast Idaho.',
+  },
+  {
+    q: 'How do I get started?',
+    a: 'Reach out through the contact form or by phone. A short initial conversation helps determine whether you\'re ready to tour homes now or should start with a lender conversation first.',
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+}
+---
+
+<Layout
+  title="Frequently Asked Questions"
+  description={`Answers to common questions about buying and selling homes in Southeast Idaho with ${SITE.agentName}, ${SITE.brokerage}.`}
+>
+  <Fragment slot="head">
+    <JsonLd data={faqSchema} />
+  </Fragment>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="text-3xl font-bold text-stone-900">Frequently asked questions</h1>
+
+    <div class="mt-10 space-y-8">
+      {
+        faqs.map((item) => (
+          <div>
+            <h2 class="font-semibold text-stone-900">{item.q}</h2>
+            <p class="mt-2 text-stone-600">{item.a}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 rounded-lg bg-stone-50 p-6 text-center">
+      <p class="text-stone-700">Don't see your question here?</p>
+      <a href="/contact" class="mt-3 inline-block font-medium text-emerald-700">Ask directly &rarr;</a>
+    </div>
+  </section>
+</Layout>
