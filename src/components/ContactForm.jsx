@@ -17,7 +17,7 @@ export default function ContactForm() {
     event.preventDefault()
     setStatus('submitting')
 
-    const { error } = await supabase.from('leads').insert({
+    const { error } = await supabase.from('contact_submissions').insert({
       name: form.name,
       email: form.email,
       phone: form.phone || null,
@@ -26,6 +26,7 @@ export default function ContactForm() {
     })
 
     if (error) {
+      console.error('Contact form submission failed:', error)
       setStatus('error')
       return
     }
