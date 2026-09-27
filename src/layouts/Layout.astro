@@ -18,7 +18,7 @@ const realEstateAgentSchema = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
   name: SITE.agentName,
-  description: `${SITE.agentName} is a real estate agent with ${SITE.brokerage} serving Southeast Idaho, including ${AREAS.map((a) => a.name).join(', ')}.`,
+  description: `${SITE.agentName} is a licensed real estate agent with ${SITE.brokerage} offering flat-fee services for FSBO (for-sale-by-owner) sellers and buyers in ${SITE.areaSentence} — choose only the help you need: contract review, marketing, open houses, or market data.`,
   url: SITE.url,
   telephone: SITE.phoneRaw,
   email: SITE.email,

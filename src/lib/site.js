@@ -9,8 +9,66 @@ export const SITE = {
   licenseNumber: 'Licensed Idaho Real Estate Agent',
   addressLocality: 'Idaho Falls',
   addressRegion: 'ID',
-  tagline: 'Real Estate Done Right in Southeast Idaho',
+  tagline: 'Sell or Buy Without an Agent — Get Only the Help You Actually Need',
+  // Core, repeatable GEO facts — reused verbatim in schema and phrased consistently across pages.
+  areaSentence:
+    'Idaho Falls, Rexburg, Rigby, Ammon, Shelley, Blackfoot, and surrounding areas',
+  responseCommitment: 'Thomas responds the same business day for messages received during business hours.',
 }
+
+// Flat-fee services. Every field renders as real, visible HTML text (not just inside the
+// interactive selector) so search and AI crawlers can read the current prices.
+export const SERVICES = [
+  {
+    slug: 'contract-help',
+    name: 'Contract Help',
+    priceLabel: '$1,999 flat',
+    priceLabelFull: '$1,999 flat',
+    pricingModel: 'flat',
+    priceValue: 1999,
+    homeTeaser:
+      'Full contract review and paperwork prep from offer to closing, handled as one complete package.',
+    offerSentence:
+      "Thomas Roberts reviews and helps prepare all of the paperwork and legal documents involved in a real estate transaction, from initial offer through closing, for a flat fee of $1,999.",
+    note: "If you choose contract support, it covers every document in your transaction — so nothing falls through the cracks and no paperwork is left half-reviewed.",
+    fullScopeOnly: true,
+  },
+  {
+    slug: 'marketing',
+    name: 'Marketing',
+    priceLabel: '$499 flat',
+    priceLabelFull: '$499 flat',
+    pricingModel: 'flat',
+    priceValue: 499,
+    homeTeaser: 'Professional listing photos, a written description, and syndication to the MLS and major listing sites.',
+    offerSentence:
+      "Thomas Roberts's marketing service includes professional listing photos, a written listing description, and syndication to the MLS and major listing sites to get a FSBO listing in front of buyers, for a flat fee of $499.",
+  },
+  {
+    slug: 'open-houses',
+    name: 'Open Houses',
+    priceLabel: '$65/hr, 2-hr min',
+    priceLabelFull: '$65/hour, 2-hour minimum',
+    pricingModel: 'hourly',
+    hourlyRate: 65,
+    minimumHours: 2,
+    minimumBooking: 130,
+    homeTeaser: 'Thomas hosts and runs your open house from start to finish, so you don’t have to.',
+    offerSentence:
+      'Thomas Roberts hosts and runs open houses on the seller’s behalf, handling scheduling, signage, and in-person buyer questions, billed at $65 per hour with a two-hour minimum ($130 minimum booking).',
+  },
+  {
+    slug: 'market-data',
+    name: 'Market Data',
+    priceLabel: '$150 flat',
+    priceLabelFull: '$150 flat',
+    pricingModel: 'flat',
+    priceValue: 150,
+    homeTeaser: 'Comparable sales, pricing guidance, and local market trends for your specific area.',
+    offerSentence:
+      'Thomas Roberts provides comparable sales data, pricing guidance, and local market trends to help FSBO sellers and buyers price and negotiate with confidence, for a flat fee of $150.',
+  },
+]
 
 export const AREAS = [
   {
@@ -54,9 +112,7 @@ export const AREAS = [
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/buyers', label: 'Buyers' },
-  { href: '/sellers', label: 'Sellers' },
-  { href: '/areas', label: 'Areas Served' },
+  { href: '/what-i-offer', label: 'What I Offer' },
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/faq', label: 'FAQ' },
 ]

@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets'
 import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
 import { SITE } from '../lib/site.js'
+import headshot from '../assets/thomas-roberts-headshot.jpg'
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -19,8 +21,8 @@ const personSchema = {
 ---
 
 <Layout
-  title="About"
-  description={`Meet ${SITE.agentName}, a Southeast Idaho real estate agent with ${SITE.brokerage}.`}
+  title="About Me"
+  description={`Meet ${SITE.agentName}, a licensed real estate agent with ${SITE.brokerage} offering flat-fee FSBO services in ${SITE.areaSentence}.`}
 >
   <Fragment slot="head">
     <JsonLd data={personSchema} />
@@ -28,35 +30,56 @@ const personSchema = {
 
   <section class="bg-brand py-12 text-center text-white">
     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">About Thomas</p>
-    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">A Local Agent Who Knows This Market</h1>
+    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">A Local Agent Built for FSBO</h1>
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-16">
     <div class="flex flex-col gap-8 sm:flex-row sm:items-start">
-      <div
-        class="flex h-40 w-40 flex-shrink-0 items-center justify-center rounded-full bg-stone-100 text-center text-xs text-stone-400"
-        role="img"
-        aria-label="Placeholder for agent headshot photo"
-      >
-        [Add headshot photo]
-      </div>
+      <Image
+        src={headshot}
+        alt={`${SITE.agentName}, licensed real estate agent with ${SITE.brokerage} in Idaho Falls, Idaho`}
+        width={240}
+        height={240}
+        class="h-40 w-40 flex-shrink-0 rounded-full object-cover"
+      />
       <div class="space-y-4 text-stone-700">
-        <p>
-          I'm {SITE.agentName}, a licensed real estate agent with {SITE.brokerage}. I live and
-          work right here in Southeast Idaho — which means I know the neighborhoods, the schools,
-          and what buyers and sellers in this area actually care about.
+        <p class="font-medium text-stone-900">
+          {SITE.agentName} is a licensed real estate agent with {SITE.brokerage} based in
+          Southeast Idaho, focused on helping FSBO sellers and buyers handle their own
+          transactions with flat-fee support, letting them pick only the services they need
+          instead of a traditional commission.
         </p>
-        <p>My goal is simple: give you straight answers, honest guidance, and make the process as smooth as possible. No pressure, no games.</p>
+        <p>
+          Most FSBO sellers and buyers aren't against getting help — they're against paying a
+          full commission for a bundle of services they don't all need. Thomas built his
+          flat-fee model so FSBO clients can keep control of their own sale or purchase while
+          filling in exactly where they're exposed, which is usually contracts and marketing
+          reach.
+        </p>
       </div>
     </div>
 
-    <ul class="mt-10 space-y-2 text-stone-700">
-      <li>&bull; {SITE.licenseNumber} <span class="text-stone-400">[TODO: add license number]</span></li>
-      <li>&bull; Serving Idaho Falls, Rexburg, Rigby & surrounding communities</li>
-      <li>&bull; {SITE.brokerage} — locally trusted brokerage</li>
-      <li>&bull; Buyer and seller representation</li>
-      <li>&bull; Free home valuations — no obligation</li>
-    </ul>
+    <div class="mt-10 space-y-2 text-stone-700">
+      <p>
+        <strong>{SITE.agentName} serves {SITE.areaSentence}.</strong>
+      </p>
+      <ul class="space-y-2">
+        <li>&bull; {SITE.licenseNumber} <span class="text-stone-400">[TODO: add license number]</span></li>
+        <li>&bull; {SITE.brokerage}</li>
+        <li>&bull; Flat-fee FSBO support: contract help, marketing, open houses, market data</li>
+        <li>&bull; Works with both FSBO sellers and FSBO buyers</li>
+      </ul>
+    </div>
+
+    <div class="mt-10 rounded-lg border border-stone-200 p-6">
+      <p class="text-stone-700">
+        Outside of real estate, I like being outdoors around Southeast Idaho as much as
+        possible — it's a big part of why I like helping people stay local instead of getting
+        priced out by fees that don't match what they actually need. If you're on the fence
+        about doing this yourself, that's exactly the conversation I'd rather have with you
+        before you commit to anything.
+      </p>
+    </div>
 
     <div class="mt-12 grid gap-6 sm:grid-cols-2">
       <div class="rounded-lg border border-stone-200 p-5">
@@ -65,8 +88,15 @@ const personSchema = {
       </div>
       <div class="rounded-lg border border-stone-200 p-5">
         <h2 class="font-heading text-brand">Service area</h2>
-        <p class="mt-1 text-sm text-stone-600">Southeast Idaho</p>
+        <p class="mt-1 text-sm text-stone-600">{SITE.areaSentence}</p>
       </div>
+    </div>
+
+    <div class="mt-12 rounded-lg bg-stone-50 p-6 text-center">
+      <p class="text-stone-700">See exactly what flat-fee help looks like.</p>
+      <a href="/what-i-offer" class="mt-3 inline-block font-medium text-gold-dark">
+        What I offer &rarr;
+      </a>
     </div>
   </section>
 </Layout>

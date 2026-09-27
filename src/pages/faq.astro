@@ -1,40 +1,50 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
-import { SITE } from '../lib/site.js'
+import { SITE, SERVICES } from '../lib/site.js'
+
+const priceBySlug = Object.fromEntries(SERVICES.map((s) => [s.slug, s.priceLabelFull]))
 
 const faqs = [
   {
-    q: 'What areas of Southeast Idaho do you serve?',
-    a: `${SITE.agentName} works with buyers and sellers throughout Southeast Idaho, including Idaho Falls, Rexburg, Rigby, Ammon, Shelley, and Blackfoot.`,
+    q: 'What does it cost to work with Thomas instead of a traditional agent?',
+    a: `${SITE.agentName} charges a flat fee per service instead of a commission on the sale price: Contract Help is ${priceBySlug['contract-help']}, Marketing is ${priceBySlug['marketing']}, Market Data is ${priceBySlug['market-data']}, and Open Houses is ${priceBySlug['open-houses']}. Total cost depends on which services you select, not on your home's sale price.`,
   },
   {
-    q: 'How much does it cost to work with a buyer\'s agent?',
-    a: 'In most transactions, the seller pays the buyer\'s agent commission as part of the sale, so there is typically no direct out-of-pocket cost to the buyer. Exact terms are outlined in a buyer representation agreement before touring homes.',
+    q: 'Do I have to use all the services, or can I pick just one?',
+    a: 'You can choose any combination of marketing, open houses, and market data individually. Contract help, if selected, covers the full transaction rather than select documents.',
   },
   {
-    q: 'How long does it take to sell a home in Southeast Idaho?',
-    a: 'Time on market varies by city, price point, and season, but a well-priced, well-marketed home in the Southeast Idaho market often receives offers within the first few weeks of listing. A free home valuation can give a more specific estimate for your property.',
+    q: "Why can't I get help with just some of the contract paperwork?",
+    a: 'Partial contract review creates liability and coverage gaps, so once you choose contract help, Thomas handles every document in your transaction from offer through closing — that way nothing falls through the cracks and no paperwork is left half-reviewed.',
   },
   {
-    q: 'Do I need to be pre-approved before touring homes?',
-    a: 'It is strongly recommended. A pre-approval letter from a lender clarifies your budget and makes any offer you submit significantly more competitive in a multiple-offer situation.',
+    q: 'Am I still selling my home myself if I use these services?',
+    a: `Yes. You stay in control of showings and the sale, and ${SITE.agentName} fills in specific gaps with the services you select.`,
   },
   {
-    q: 'What is my home worth right now?',
-    a: `The most accurate answer comes from an in-person walkthrough and a comparative market analysis of recent, truly comparable sales nearby. Online automated estimates are frequently off by a meaningful margin. Contact ${SITE.agentName} for a free, no-obligation valuation.`,
+    q: "What's the difference between this and just hiring a full-service agent?",
+    a: 'No commission on the sale price, no bundled services you don’t want, and direct flat-fee pricing for only the help you choose.',
   },
   {
-    q: 'Do you work with first-time homebuyers?',
-    a: 'Yes. First-time buyers get a full walkthrough of the process, from pre-approval through closing, with plain-language explanations at every step.',
+    q: 'Is Thomas Roberts a licensed real estate agent?',
+    a: `Yes. ${SITE.agentName} is a licensed real estate agent in Idaho with ${SITE.brokerage}.`,
   },
   {
-    q: 'Can you help with relocation to Southeast Idaho?',
-    a: 'Yes. Out-of-area and out-of-state buyers relocating for work, family, or lifestyle reasons receive additional guidance on neighborhoods, schools, and commute considerations specific to Southeast Idaho.',
+    q: 'What areas does he serve?',
+    a: `${SITE.agentName} serves ${SITE.areaSentence}.`,
   },
   {
     q: 'How do I get started?',
-    a: 'Reach out through the contact form or by phone. A short initial conversation helps determine whether you\'re ready to tour homes now or should start with a lender conversation first.',
+    a: 'Visit the Get Started page and answer a few quick questions about what you need — Thomas will follow up to go over flat-fee options.',
+  },
+  {
+    q: 'Can buyers use these services too, or is this seller-only?',
+    a: 'Yes — the same flat-fee, pick-only-what-you-need services (contract help, marketing, open houses, market data) are available to FSBO buyers as well as sellers.',
+  },
+  {
+    q: 'How quickly does Thomas respond after I reach out?',
+    a: SITE.responseCommitment,
   },
 ]
 
@@ -54,7 +64,7 @@ const faqSchema = {
 
 <Layout
   title="Frequently Asked Questions"
-  description={`Answers to common questions about buying and selling homes in Southeast Idaho with ${SITE.agentName}, ${SITE.brokerage}.`}
+  description={`Answers to common FSBO questions about flat-fee contract help, marketing, open houses, and market data with ${SITE.agentName} in ${SITE.areaSentence}.`}
 >
   <Fragment slot="head">
     <JsonLd data={faqSchema} />
@@ -62,6 +72,10 @@ const faqSchema = {
 
   <section class="mx-auto max-w-3xl px-6 py-16">
     <h1 class="font-heading text-3xl text-brand">Frequently asked questions</h1>
+    <p class="mt-4 text-stone-600">
+      Thomas Roberts offers flat-fee real estate services for FSBO sellers and buyers in {SITE.areaSentence} — choose only the help you need from contract review, marketing, open
+      houses, and market data.
+    </p>
 
     <div class="mt-10 space-y-8">
       {
@@ -76,7 +90,7 @@ const faqSchema = {
 
     <div class="mt-12 rounded-lg bg-stone-50 p-6 text-center">
       <p class="text-stone-700">Don't see your question here?</p>
-      <a href="/contact" class="mt-3 inline-block font-medium text-gold-dark">Ask directly &rarr;</a>
+      <a href="/get-started" class="mt-3 inline-block font-medium text-gold-dark">Ask directly &rarr;</a>
     </div>
   </section>
 </Layout>

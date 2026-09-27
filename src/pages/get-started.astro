@@ -1,19 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import ContactForm from '../components/ContactForm.jsx'
+import GetStartedForm from '../components/GetStartedForm.jsx'
 import { SITE } from '../lib/site.js'
 ---
 
 <Layout
-  title="Contact"
-  description={`Get in touch with ${SITE.agentName}, real estate agent with ${SITE.brokerage} serving Southeast Idaho.`}
+  title="Get Started"
+  description={`Tell ${SITE.agentName} what you need help with as a FSBO seller or buyer in ${SITE.areaSentence} — flat-fee contract help, marketing, open houses, and market data.`}
 >
   <section class="mx-auto grid max-w-5xl gap-12 px-6 py-16 sm:grid-cols-2">
     <div>
-      <h1 class="font-heading text-3xl text-brand">Get in touch</h1>
+      <h1 class="font-heading text-3xl text-brand">Get started</h1>
       <p class="mt-4 text-stone-600">
-        Whether you're ready to tour homes, curious what your property is worth, or just have a
-        question about the Southeast Idaho market, reach out.
+        Thomas Roberts offers flat-fee real estate services for FSBO sellers and buyers in {SITE.areaSentence} — choose only the help you need: contract review, marketing, open
+        houses, or market data. Answer a few quick questions below and Thomas will follow up to
+        go over flat-fee options for exactly what you're looking for.
       </p>
 
       <dl class="mt-8 space-y-3 text-sm">
@@ -30,10 +31,12 @@ import { SITE } from '../lib/site.js'
           <dd>{SITE.brokerage}</dd>
         </div>
       </dl>
+
+      <p class="mt-6 text-sm text-stone-500">{SITE.responseCommitment}</p>
     </div>
 
     <div>
-      <ContactForm client:load />
+      <GetStartedForm client:load />
     </div>
   </section>
 </Layout>
