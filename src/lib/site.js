@@ -29,7 +29,7 @@ export const SERVICES = [
     homeTeaser:
       'Full contract review and paperwork prep from offer to closing, handled as one complete package.',
     offerSentence:
-      "Thomas Roberts reviews and helps prepare all of the paperwork and legal documents involved in a real estate transaction, from initial offer through closing, for a flat fee of $1,999.",
+      "Thomas reviews and helps prepare all of the paperwork and legal documents involved in a real estate transaction, from initial offer through closing, for a flat fee of $1,999.",
     note: "If you choose contract support, it covers every document in your transaction — so nothing falls through the cracks and no paperwork is left half-reviewed.",
     fullScopeOnly: true,
   },
@@ -42,7 +42,7 @@ export const SERVICES = [
     priceValue: 499,
     homeTeaser: 'Professional listing photos, a written description, and syndication to the MLS and major listing sites.',
     offerSentence:
-      "Thomas Roberts's marketing service includes professional listing photos, a written listing description, and syndication to the MLS and major listing sites to get a FSBO listing in front of buyers, for a flat fee of $499.",
+      "Thomas's marketing service includes professional listing photos, a written listing description, and syndication to the MLS and major listing sites to get a FSBO listing in front of buyers, for a flat fee of $499.",
   },
   {
     slug: 'open-houses',
@@ -55,7 +55,7 @@ export const SERVICES = [
     minimumBooking: 130,
     homeTeaser: 'Thomas hosts and runs your open house from start to finish, so you don’t have to.',
     offerSentence:
-      'Thomas Roberts hosts and runs open houses on the seller’s behalf, handling scheduling, signage, and in-person buyer questions, billed at $65 per hour with a two-hour minimum ($130 minimum booking).',
+      'Thomas hosts and runs open houses on the seller’s behalf, handling scheduling, signage, and in-person buyer questions, billed at $65 per hour with a two-hour minimum ($130 minimum booking).',
   },
   {
     slug: 'market-data',
@@ -66,7 +66,7 @@ export const SERVICES = [
     priceValue: 150,
     homeTeaser: 'Comparable sales, pricing guidance, and local market trends for your specific area.',
     offerSentence:
-      'Thomas Roberts provides comparable sales data, pricing guidance, and local market trends to help FSBO sellers and buyers price and negotiate with confidence, for a flat fee of $150.',
+      'Thomas provides comparable sales data, pricing guidance, and local market trends to help FSBO sellers and buyers price and negotiate with confidence, for a flat fee of $150.',
   },
 ]
 
@@ -113,6 +113,7 @@ export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/what-i-offer', label: 'What I Offer' },
+  { href: '/fsbo-help', label: 'FSBO Help' },
   { href: '/testimonials', label: 'Testimonials' },
   { href: '/faq', label: 'FAQ' },
 ]
