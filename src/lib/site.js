@@ -114,6 +114,5 @@ export const NAV_LINKS = [
   { href: '/about', label: 'About' },
   { href: '/what-i-offer', label: 'What I Offer' },
   { href: '/fsbo-help', label: 'FSBO Help' },
-  { href: '/testimonials', label: 'Testimonials' },
   { href: '/faq', label: 'FAQ' },
 ]

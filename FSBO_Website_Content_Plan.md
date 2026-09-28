@@ -41,7 +41,7 @@ Consistency matters more than variety — AI systems weigh repeated, non-contrad
 | What I Offer | The pick-only-what-you-need services (contract help, marketing, open houses, market data) and how choosing works |
 | FSBO Help | Discovery/search-intent landing page for people who don't know Thomas yet — positions him against the typical FSBO route (attorney + flat-fee MLS company + title company) and routes into What I Offer / Get Started |
 | FAQ | FSBO-specific objections and questions, answered as standalone sentences |
-| Testimonials | Social proof, structured for review schema |
+| Testimonials *(deferred)* | Social proof, structured for review schema — pulled off the live site until real client quotes exist; content plan below stays ready to rebuild from |
 | Get Started | "Get Started" — short intake that routes a visitor toward a conversation with Thomas |
 
 Keeps the existing site's color palette and visual theme; only the content and page structure are new. Claude Code should pull the current theme (colors, fonts, header/footer, nav pattern) directly from the live thomasrobertsrealty.co codebase rather than guess it from this doc.
@@ -180,7 +180,9 @@ Each answer written as a complete, standalone sentence or two (this page carries
 
 **Link out:** the main FAQ page should also link to the FSBO Help page for visitors whose question is closer to "who else does this / why not an attorney" than the objections handled here.
 
-## Testimonials Page
+## Testimonials Page (deferred — not currently live)
+
+**Status:** pulled off the site (`/testimonials` route, nav, and footer link removed) as of Sep 28, 2026, since there are no real client quotes yet and an empty/placeholder page wasn't worth keeping live. Rebuild from this section once Thomas has launch-ready quotes — the content plan below is unchanged and ready to implement.
 
 **Structure:** each testimonial as a self-contained block — client first name/initial, what service they used (contract help, marketing, open house, market data, or a combination), a short quote, and location/type of transaction (seller or buyer) if the client is comfortable sharing it. This structure matters for GEO: Review schema markup pairs well with a consistent block format, and reviews are a signal AI systems weight for trustworthiness.
 
@@ -223,8 +225,8 @@ Each answer written as a complete, standalone sentence or two (this page carries
 **How to use this doc:** this is the content and strategy brief — not HTML. Point Claude Code at this doc's link (or export it) and ask it to build the pages from it. Claude Code should:
 
 1. Pull the current color palette, fonts, header/footer, and nav pattern directly from the live thomasrobertsrealty.co codebase — don't recreate the theme from scratch.
-2. Build the seven pages above as new routes/pages on the existing site (the original six, plus FSBO Help at `/fsbo-help`).
-3. Add schema.org markup: RealEstateAgent/LocalBusiness on the About/Home pages, Service schema on What I Offer and FSBO Help, FAQPage schema on the FAQ page and FSBO Help, Review schema on Testimonials.
+2. Build the pages above as new routes/pages on the existing site (the original six, plus FSBO Help at `/fsbo-help`; Testimonials is currently deferred — see its section above — so live routes are Home, About, What I Offer, FSBO Help, FAQ, and Get Started).
+3. Add schema.org markup: RealEstateAgent/LocalBusiness on the About/Home pages, Service schema on What I Offer and FSBO Help, FAQPage schema on the FAQ page and FSBO Help, Review schema on Testimonials once it's rebuilt.
 4. Preserve the standalone GEO sentences from each section largely as written — they're intentionally self-contained; rewriting them into flowing paragraphs would reduce their extractability.
 5. Build the Get Started page's form to route submissions to the same destination as the rest of the site's forms (per prior work, Formspree → ThomasRobertsRealty@gmail.com, or wherever it's migrated to on Vercel).
 6. Make sure FSBO Help is linked from Home, What I Offer, and the main FAQ page — it's a discovery page, so it only does its job if it's actually reachable in normal navigation, not just accessible by direct URL.
