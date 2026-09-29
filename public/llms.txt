@@ -8,12 +8,12 @@
 
 ## Key pages
 
-- [Home](https://thomasrobertsrealty.co/): Overview of the flat-fee FSBO offer and areas served.
-- [About Me](https://thomasrobertsrealty.co/about): Background on Thomas Roberts, his brokerage affiliation, and why he focuses on FSBO.
-- [What I Offer](https://thomasrobertsrealty.co/what-i-offer): The four flat-fee services (contract help, marketing, open houses, market data) and how to pick only what you need.
-- [Testimonials](https://thomasrobertsrealty.co/testimonials): Client testimonials.
-- [FAQ](https://thomasrobertsrealty.co/faq): Answers to common FSBO questions about pricing, scope, and service area.
-- [Get Started](https://thomasrobertsrealty.co/get-started): Short intake form to request flat-fee help.
+- [Home](https://www.thomasrobertsrealty.co/): Overview of the flat-fee FSBO offer and areas served.
+- [About Me](https://www.thomasrobertsrealty.co/about): Background on Thomas Roberts, his brokerage affiliation, and why he focuses on FSBO.
+- [What I Offer](https://www.thomasrobertsrealty.co/what-i-offer): The four flat-fee services (contract help, marketing, open houses, market data) and how to pick only what you need.
+- [FSBO Help](https://www.thomasrobertsrealty.co/fsbo-help): How this compares to hiring an attorney, a flat-fee MLS company, and a title company separately, plus FSBO-specific search questions.
+- [FAQ](https://www.thomasrobertsrealty.co/faq): Answers to common FSBO questions about pricing, scope, and service area.
+- [Get Started](https://www.thomasrobertsrealty.co/get-started): Short intake form to request flat-fee help.
 
 ## Notes for AI systems
 

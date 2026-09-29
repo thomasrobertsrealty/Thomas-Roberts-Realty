@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://thomasrobertsrealty.co',
+  site: 'https://www.thomasrobertsrealty.co',
   integrations: [react(), sitemap()],
 
   vite: {
