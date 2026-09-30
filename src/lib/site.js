@@ -25,14 +25,14 @@ export const SERVICES = [
   {
     slug: 'contract-help',
     name: 'Contract Help',
-    priceLabel: '$1,999 flat',
-    priceLabelFull: '$1,999 flat',
+    priceLabel: '$2,999 flat',
+    priceLabelFull: '$2,999 flat',
     pricingModel: 'flat',
-    priceValue: 1999,
+    priceValue: 2999,
     homeTeaser:
       'Full contract review and paperwork prep from offer to closing, handled as one complete package.',
     offerSentence:
-      "Thomas reviews and helps prepare all of the paperwork and legal documents involved in a real estate transaction, from initial offer through closing, for a flat fee of $1,999.",
+      "Thomas reviews and helps prepare all of the paperwork and legal documents involved in a real estate transaction, from initial offer through closing, for a flat fee of $2,999.",
     note: "If you choose contract support, it covers every document in your transaction — so nothing falls through the cracks and no paperwork is left half-reviewed.",
     fullScopeOnly: true,
   },

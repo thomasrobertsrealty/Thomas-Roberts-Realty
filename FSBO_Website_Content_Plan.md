@@ -117,7 +117,7 @@ Follow with one short section per service, each written so it could stand alone 
 
 **Pricing — FINAL, locked in:**
 
-- Contract Help: **$1,999 flat** (covers full transaction paperwork, offer through closing)
+- Contract Help: **$2,999 flat** (covers full transaction paperwork, offer through closing)
 - Marketing: **$499 flat**
 - Market Data: **$150 flat**
 - Open Houses: **$65/hour, 2-hour minimum ($130 minimum booking)**
@@ -142,7 +142,7 @@ Showing actual numbers here matters for both trust (transparency is the core pit
 
 | Need | Typical FSBO route | With Thomas |
 | --- | --- | --- |
-| Contract review/preparation | Hire a real estate attorney separately | Available as a standalone service ($1,999 flat, full transaction) |
+| Contract review/preparation | Hire a real estate attorney separately | Available as a standalone service ($2,999 flat, full transaction) |
 | MLS/Zillow/Realtor.com exposure | Hire a flat-fee MLS company separately | Available as a standalone service ($499 flat) — direct MLS access as a licensed agent |
 | Open house coverage | Usually self-run or not offered | Available hourly ($65/hr, 2-hour minimum) |
 | Market pricing guidance | Often not offered without a full agent | Available as a standalone service ($150 flat) |
@@ -235,6 +235,6 @@ Each answer written as a complete, standalone sentence or two (this page carries
 
 **On the What I Offer button-selector:** implement service selection as client-side toggle state (selected/unselected per button), running total shown as services are picked, then a submit action that emails Thomas — likely via the same Formspree/Vercel form pipeline used elsewhere on the site — with client name, contact info, selected services and their prices, and the total.
 
-**Pricing is now final** — Contract Help $1,999 flat, Marketing $499 flat, Market Data $150 flat, Open Houses $65/hour with a 2-hour minimum ($130 minimum booking). Nothing pricing-related remains open in this doc.
+**Pricing is now final** — Contract Help $2,999 flat, Marketing $499 flat, Market Data $150 flat, Open Houses $65/hour with a 2-hour minimum ($130 minimum booking). Nothing pricing-related remains open in this doc.
 
 **Still open before build:** nothing content-related for the seven pages. Outstanding items are the two open questions already flagged above (Testimonials: any launch-ready past-client quotes; Get Started: confirm response-timeframe wording) and the off-site directory work noted in the FSBO Help section (Google Business Profile, Zillow/Realtor.com profiles).
