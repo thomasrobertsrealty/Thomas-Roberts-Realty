@@ -57,7 +57,7 @@ export default function ServiceSelector() {
     const { error } = await supabase.from('leads').insert({
       name: contact.name,
       email: contact.email,
-      phone: contact.phone || null,
+      phone: contact.phone,
       address: 'Not provided (submitted via What I Offer selector)',
       source: 'what_i_offer_selector',
       notes,
@@ -169,12 +169,13 @@ export default function ServiceSelector() {
           </div>
           <div>
             <label htmlFor="selector-phone" className="block text-sm font-medium text-stone-700">
-              Phone <span className="text-stone-400">(optional)</span>
+              Phone
             </label>
             <input
               id="selector-phone"
               name="phone"
               type="tel"
+              required
               value={contact.phone}
               onChange={handleContactChange}
               className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
