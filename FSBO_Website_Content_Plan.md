@@ -20,7 +20,7 @@ Consistency matters more than variety — AI systems weigh repeated, non-contrad
 
 **"For Sale By Owner" spelling rule:** use the full phrase "For Sale By Owner" (not just the acronym "FSBO") at least once on every page, ideally in the page's H1/heading, page title, meta description, or opening sentence. After that first prominent use, "FSBO" is fine for the rest of that page's copy. This is one clear, prominent instance per page, not a blanket find-and-replace of every "FSBO" and not repeated keyword stuffing. Specifics:
 
-- **FSBO Help (`/fsbo-help`):** the H1, page title, and meta description all spell out "For Sale By Owner" in full, and the opening sentence reads "Thomas Roberts provides flat-fee, à la carte support for For Sale By Owner (FSBO) sellers and buyers..." rather than leading with the acronym.
+- **FSBO Help (`/fsbo-help`):** the H1, page title, and meta description all spell out "For Sale By Owner" in full, and the opening sentence reads "Thomas Roberts provides flat-fee support for For Sale By Owner (FSBO) sellers and buyers..." rather than leading with the acronym.
 - **Home and What I Offer:** work "For Sale By Owner" into the page title and meta description, not just "FSBO."
 - **Every other page** (About Me, FAQ, Get Started, and Testimonials when rebuilt): if "FSBO" appears only as the acronym with no spelled-out version anywhere on the page, add one prominent instance.
 
@@ -140,7 +140,7 @@ Showing actual numbers here matters for both trust (transparency is the core pit
 
 **How this page relates to What I Offer:** FSBO Help is *not* a replacement for or merge with What I Offer — it's a separate landing page with a different job. FSBO Help is the **discovery/search-intent page**, built to get found by people who don't know Thomas yet and are searching for FSBO-adjacent help in general terms. What I Offer is the **decision page** — the button-selector for someone who already knows they want to work with Thomas and is ready to pick services. FSBO Help should link into What I Offer and Get Started as its next step, not duplicate their content.
 
-**Opening standalone sentence:** "Thomas Roberts provides flat-fee, à la carte support for For Sale By Owner (FSBO) sellers and buyers in Idaho Falls, Rexburg, Rigby, Ammon, Shelley, Blackfoot, and surrounding Southeast Idaho areas — contract review, MLS marketing, open houses, and market data, each available individually, with no full-service agent commitment required." (First mention on the page uses the full name; nearby mentions on this page use "Thomas" to avoid reading as repetitive — see note below.)
+**Opening standalone sentence:** "Thomas Roberts provides flat-fee support for For Sale By Owner (FSBO) sellers and buyers in Idaho Falls, Rexburg, Rigby, Ammon, Shelley, Blackfoot, and surrounding Southeast Idaho areas — contract review, MLS marketing, open houses, and market data, each available individually, with no full-service agent commitment required." (First mention on the page uses the full name; nearby mentions on this page use "Thomas" to avoid reading as repetitive — see note below.)
 
 **Differentiator sentence:** "Unlike hiring an attorney, a flat-fee MLS company, and a title company separately, Thomas offers contract help, MLS marketing, open houses, and market data from a single licensed agent — pick only what's needed, with no full-service commitment."
 

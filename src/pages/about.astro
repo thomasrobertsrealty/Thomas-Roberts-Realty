@@ -22,7 +22,7 @@ const personSchema = {
 
 <Layout
   title="About Me"
-  description={`Meet ${SITE.agentName}, a licensed real estate agent with ${SITE.brokerage} offering flat-fee FSBO services in ${SITE.areaSentence}.`}
+  description={`Meet ${SITE.agentName}, a licensed real estate agent with ${SITE.brokerage} offering flat-fee For Sale By Owner (FSBO) services in ${SITE.areaSentence}.`}
 >
   <Fragment slot="head">
     <JsonLd data={personSchema} />
@@ -44,7 +44,7 @@ const personSchema = {
       <div class="space-y-4 text-stone-700">
         <p class="font-medium text-stone-900">
           {SITE.agentName} is a licensed real estate agent with {SITE.brokerage} based in
-          Southeast Idaho, focused on helping FSBO sellers and buyers handle their own
+          Southeast Idaho, focused on helping For Sale By Owner (FSBO) sellers and buyers handle their own
           transactions with flat-fee support, letting them pick only the services they need
           instead of a traditional commission.
         </p>
