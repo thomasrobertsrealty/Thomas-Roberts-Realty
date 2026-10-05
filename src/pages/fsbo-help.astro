@@ -98,6 +98,19 @@ const serviceSchemas = SERVICES.map((service) => ({
           priceCurrency: 'USD',
         },
 }))
+// Tiered services publish a price range instead of a single price.
+serviceSchemas.forEach((schema, i) => {
+  const service = SERVICES[i]
+  if (service.pricingModel === 'tiered') {
+    schema.offers = {
+      '@type': 'AggregateOffer',
+      lowPrice: service.priceValue,
+      highPrice: service.priceHigh,
+      priceCurrency: 'USD',
+      offerCount: service.tiers.length,
+    }
+  }
+})
 ---
 
 <Layout

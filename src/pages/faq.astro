@@ -8,7 +8,7 @@ const priceBySlug = Object.fromEntries(SERVICES.map((s) => [s.slug, s.priceLabel
 const faqs = [
   {
     q: 'What does it cost to work with Thomas instead of a traditional agent?',
-    a: `${SITE.agentName} charges a flat fee per service instead of a commission on the sale price: Contract Help is ${priceBySlug['contract-help']}, Marketing is ${priceBySlug['marketing']}, Market Data is ${priceBySlug['market-data']}, and Open Houses is ${priceBySlug['open-houses']}. Total cost depends on which services you select, not on your home's sale price.`,
+    a: `${SITE.agentName} charges a flat fee per service instead of a commission on the sale price: Contract Help is ${priceBySlug['contract-help']}, Marketing is ${priceBySlug['marketing']}, Market Data is ${priceBySlug['market-data']}, and Open Houses is ${priceBySlug['open-houses']}. Contract Help is tiered by home price ($3,000 for $300,000–$400,000, $4,500 for $400,000–$600,000, $6,000 for $600,000–$1,000,000); the other services are not tied to your home's sale price. Total cost depends on which services you select.`,
   },
   {
     q: 'Do I have to use all the services, or can I pick just one?',
