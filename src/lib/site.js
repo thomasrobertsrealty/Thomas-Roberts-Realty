@@ -32,14 +32,16 @@ export const SERVICES = [
     priceHigh: 6000,
     // Flat fee by home price range. Edit here and every page, schema, and the selector update.
     tiers: [
-      { id: 'tier-1', rangeLabel: '$300,000 – $400,000', price: 3000 },
+      { id: 'tier-1', rangeLabel: '$200,000 – $400,000', price: 3000 },
       { id: 'tier-2', rangeLabel: '$400,000 – $600,000', price: 4500 },
       { id: 'tier-3', rangeLabel: '$600,000 – $1,000,000', price: 6000 },
     ],
+    // Shown last in the selector's dropdown for homes outside the tiers; no price, Thomas quotes it.
+    customTier: { id: 'custom', rangeLabel: "My price range isn't listed" },
     homeTeaser:
       'Full contract review and paperwork prep from offer to closing, handled as one complete package.',
     offerSentence:
-      "Thomas reviews and helps prepare all of the paperwork and legal documents involved in a real estate transaction, from initial offer through closing, for a flat fee based on your home's price: $3,000 for homes priced $300,000 to $400,000, $4,500 for $400,000 to $600,000, and $6,000 for $600,000 to $1,000,000.",
+      "Thomas reviews and helps prepare all of the paperwork and legal documents involved in a real estate transaction, from initial offer through closing, for a flat fee based on your home's price: $3,000 for homes priced $200,000 to $400,000, $4,500 for $400,000 to $600,000, and $6,000 for $600,000 to $1,000,000.",
     note: "If you choose contract support, it covers every document in your transaction — so nothing falls through the cracks and no paperwork is left half-reviewed.",
     fullScopeOnly: true,
   },
