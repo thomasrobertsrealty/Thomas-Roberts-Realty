@@ -39,6 +39,19 @@ const serviceSchemas = SERVICES.map((service) => ({
           priceCurrency: 'USD',
         },
 }))
+// Tiered services publish a price range instead of a single price.
+serviceSchemas.forEach((schema, i) => {
+  const service = SERVICES[i]
+  if (service.pricingModel === 'tiered') {
+    schema.offers = {
+      '@type': 'AggregateOffer',
+      lowPrice: service.priceValue,
+      highPrice: service.priceHigh,
+      priceCurrency: 'USD',
+      offerCount: service.tiers.length,
+    }
+  }
+})
 ---
 
 <Layout
@@ -57,7 +70,7 @@ const serviceSchemas = SERVICES.map((service) => ({
   <section class="mx-auto max-w-3xl px-6 py-16">
     <p class="text-lg text-stone-700">
       Thomas Roberts offers four services to FSBO sellers and buyers, available individually or
-      together at a flat rate: Contract Help ($2,999 flat), Marketing ($499 flat), Market Data
+      together at a flat rate: Contract Help ($3,000–$6,000 flat, based on home price), Marketing ($499 flat), Market Data
       ($150 flat), and Open Houses ($65/hour, 2-hour minimum).
     </p>
 
@@ -69,6 +82,15 @@ const serviceSchemas = SERVICES.map((service) => ({
               {service.name} — <span class="text-gold-dark">{service.priceLabelFull}</span>
             </h2>
             <p class="mt-2 text-stone-600">{service.offerSentence}</p>
+            {service.tiers && (
+              <ul class="mt-3 space-y-1 text-stone-700">
+                {service.tiers.map((tier) => (
+                  <li>
+                    {tier.rangeLabel} home: <strong>${tier.price.toLocaleString('en-US')}</strong>
+                  </li>
+                ))}
+              </ul>
+            )}
             {service.note && <p class="mt-2 text-sm text-stone-500">{service.note}</p>}
           </div>
         ))
