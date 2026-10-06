@@ -1,14 +1,43 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { Image, getImage } from 'astro:assets'
+import JsonLd from '../components/JsonLd.astro'
+import heroPhoto from '../assets/fsbo-home-hero.jpg'
 import { SITE, SERVICES } from '../lib/site.js'
+
+const heroAlt = `Modern craftsman-style home with white board-and-batten siding, stone accents, and a dark garage door, with a red and white For Sale By Owner yard sign on the lawn, representing FSBO homes in ${SITE.areaSentence}`
+const heroOptimized = await getImage({ src: heroPhoto, format: 'webp', width: 1600 })
+const heroSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageObject',
+  contentUrl: new URL(heroOptimized.src, SITE.url).href,
+  name: 'For Sale By Owner home in Southeast Idaho',
+  description: heroAlt,
+  contentLocation: SITE.areaSentence,
+  creator: { '@type': 'RealEstateAgent', name: SITE.agentName },
+}
 ---
 
 <Layout
   title="Flat-Fee For Sale By Owner (FSBO) Real Estate Help"
   description={`Thomas Roberts offers flat-fee support for For Sale By Owner (FSBO) sellers and buyers in ${SITE.areaSentence} — choose only what you need from contract review, marketing, open houses, and market data.`}
 >
-  <section class="bg-brand py-20 text-center text-white">
-    <div class="mx-auto max-w-5xl px-6">
+  <Fragment slot="head">
+    <JsonLd data={heroSchema} />
+  </Fragment>
+
+  <section class="relative overflow-hidden bg-brand py-20 text-center text-white">
+    <Image
+      src={heroPhoto}
+      alt={heroAlt}
+      widths={[640, 960, 1280, 1600]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-brand-dark/30" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-6 [text-shadow:0_1px_8px_rgba(0,0,0,0.55)]">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
         Flat-Fee FSBO Support
       </p>
