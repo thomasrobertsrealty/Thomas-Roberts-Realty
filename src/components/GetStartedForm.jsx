@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 import { SERVICES } from '../lib/site.js'
 
-const NEED_OPTIONS = [...SERVICES.map((s) => s.name), 'Not sure yet']
+const CONSULT_OPTION = 'Free For Sale By Owner consultation'
+const NEED_OPTIONS = [...SERVICES.map((s) => s.name), CONSULT_OPTION, 'Not sure yet']
 const TIMELINE_OPTIONS = ['Already listed', 'Planning to list soon', 'Just exploring']
 
 const initialForm = {
@@ -39,7 +40,9 @@ export default function GetStartedForm() {
     event.preventDefault()
     setStatus('submitting')
 
+    const wantsConsult = form.needs.includes(CONSULT_OPTION)
     const notes = [
+      ...(wantsConsult ? ['*** FREE FOR SALE BY OWNER CONSULTATION REQUESTED ***'] : []),
       `Buying or selling: ${form.role}`,
       `Wants help with: ${form.needs.length ? form.needs.join(', ') : 'Not specified'}`,
       `Timeline: ${form.timeline}`,
@@ -50,7 +53,7 @@ export default function GetStartedForm() {
       email: form.email,
       phone: form.phone || null,
       address: form.location || null,
-      source: 'get_started_form',
+      source: wantsConsult ? 'get_started_form_fsbo_consultation' : 'get_started_form',
       notes,
     })
 
@@ -68,11 +71,13 @@ export default function GetStartedForm() {
 
   if (status === 'success') {
     const needsLabel = submittedNeeds.length ? submittedNeeds.join(', ') : 'the services you selected'
+    const onlyConsult = submittedNeeds.length === 1 && submittedNeeds[0] === CONSULT_OPTION
     return (
       <p className="rounded-md bg-gold/10 p-4 text-brand" role="status">
-        Thanks, {submittedName || 'there'}! Thomas will follow up shortly to go over flat-fee
-        options for {needsLabel}. He responds the same business day for messages received during
-        business hours.
+        {onlyConsult
+          ? `Thanks, ${submittedName || 'there'}! Thomas will follow up shortly to schedule your free For Sale By Owner consultation. `
+          : `Thanks, ${submittedName || 'there'}! Thomas will follow up shortly to go over options for ${needsLabel}. `}
+        He responds the same business day for messages received during business hours.
       </p>
     )
   }
