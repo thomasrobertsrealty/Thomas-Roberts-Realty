@@ -75,7 +75,7 @@ export default function GetStartedForm() {
     return (
       <p className="rounded-md bg-gold/10 p-4 text-brand" role="status">
         {onlyConsult
-          ? `Thanks, ${submittedName || 'there'}! Thomas will follow up shortly to schedule your free For Sale By Owner consultation. `
+          ? `Thanks, ${submittedName || 'there'}! Thomas will follow up shortly to schedule your free For Sale By Owner consultation on Google Meet. `
           : `Thanks, ${submittedName || 'there'}! Thomas will follow up shortly to go over options for ${needsLabel}. `}
         He responds the same business day for messages received during business hours.
       </p>
