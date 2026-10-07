@@ -1,8 +1,9 @@
 export const SITE = {
-  // Vercel is configured with www as the primary domain (thomasrobertsrealty.co 308-redirects
-  // here) — this must match, or canonical tags/sitemap end up pointing at a URL that redirects
-  // instead of the page that actually serves 200, which Google's docs flag as a canonicalization error.
-  url: 'https://www.thomasrobertsrealty.co',
+  // Vercel is configured with the apex idahoforsalebyowner.com as the primary domain (www and the
+  // old thomasrobertsrealty.co domains 308-redirect here) — this must match, or canonical tags/sitemap
+  // end up pointing at a URL that redirects instead of the page that actually serves 200, which
+  // Google's docs flag as a canonicalization error.
+  url: 'https://idahoforsalebyowner.com',
   agentName: 'Thomas Roberts',
   brokerage: 'Silvercreek Realty Group',
   phone: '(208) 709-1790',
