@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
-import { SERVICES } from '../lib/site.js'
+import { SERVICES, CONTACT_METHODS } from '../lib/site.js'
 
 const CONSULT_OPTION = 'Free For Sale By Owner consultation'
 const NEED_OPTIONS = [...SERVICES.map((s) => s.name), CONSULT_OPTION, 'Not sure yet']
@@ -14,6 +14,7 @@ const initialForm = {
   name: '',
   email: '',
   phone: '',
+  contactMethods: ['Email'],
 }
 
 export default function GetStartedForm() {
@@ -36,6 +37,18 @@ export default function GetStartedForm() {
     }))
   }
 
+  function toggleContactMethod(method) {
+    setForm((prev) => ({
+      ...prev,
+      contactMethods: prev.contactMethods.includes(method)
+        ? prev.contactMethods.filter((m) => m !== method)
+        : [...prev.contactMethods, method],
+    }))
+  }
+
+  const needsPhone =
+    form.contactMethods.includes('Phone call') || form.contactMethods.includes('Text')
+
   async function handleSubmit(event) {
     event.preventDefault()
     setStatus('submitting')
@@ -46,6 +59,7 @@ export default function GetStartedForm() {
       `Buying or selling: ${form.role}`,
       `Wants help with: ${form.needs.length ? form.needs.join(', ') : 'Not specified'}`,
       `Timeline: ${form.timeline}`,
+      `Preferred contact: ${form.contactMethods.length ? form.contactMethods.join(', ') : 'No preference'}`,
     ].join('\n')
 
     const { error } = await supabase.from('leads').insert({
@@ -189,17 +203,39 @@ export default function GetStartedForm() {
 
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-stone-700">
-          Phone <span className="text-stone-400">(optional)</span>
+          Phone{' '}
+          <span className="text-stone-400">{needsPhone ? '(required for calls or texts)' : '(optional)'}</span>
         </label>
         <input
           id="phone"
           name="phone"
           type="tel"
+          required={needsPhone}
           value={form.phone}
           onChange={handleChange}
           className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
         />
       </div>
+
+      <fieldset>
+        <legend className="text-sm font-medium text-stone-700">
+          How would you like Thomas to contact you?{' '}
+          <span className="text-stone-400">(choose any)</span>
+        </legend>
+        <div className="mt-2 flex flex-wrap gap-4">
+          {CONTACT_METHODS.map((method) => (
+            <label key={method} className="flex items-center gap-2 text-sm text-stone-700">
+              <input
+                type="checkbox"
+                checked={form.contactMethods.includes(method)}
+                onChange={() => toggleContactMethod(method)}
+                className="rounded text-gold focus:ring-gold"
+              />
+              {method}
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       {status === 'error' && (
         <p className="text-sm text-red-600" role="alert">
@@ -214,6 +250,15 @@ export default function GetStartedForm() {
       >
         {status === 'submitting' ? 'Sending…' : 'Get started'}
       </button>
+
+      <p className="text-xs text-stone-500">
+        By submitting, you agree to be contacted by Thomas about your request. No spam, no selling your
+        info, opt out anytime. See our{' '}
+        <a href="/privacy" className="underline hover:text-gold-dark">
+          privacy policy
+        </a>
+        .
+      </p>
     </form>
   )
 }

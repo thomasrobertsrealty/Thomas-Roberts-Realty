@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
-import { SERVICES } from '../lib/site.js'
+import { SERVICES, CONTACT_METHODS } from '../lib/site.js'
 
-const initialContact = { name: '', email: '', phone: '' }
+const initialContact = { name: '', email: '', phone: '', contactMethods: ['Email'] }
 
 const currency = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -71,6 +71,15 @@ export default function ServiceSelector() {
     setContact((prev) => ({ ...prev, [name]: value }))
   }
 
+  function toggleContactMethod(method) {
+    setContact((prev) => ({
+      ...prev,
+      contactMethods: prev.contactMethods.includes(method)
+        ? prev.contactMethods.filter((m) => m !== method)
+        : [...prev.contactMethods, method],
+    }))
+  }
+
   async function handleSubmit(event) {
     event.preventDefault()
     setStatus('submitting')
@@ -81,6 +90,7 @@ export default function ServiceSelector() {
       'Selected via What I Offer selector.',
       `Services requested: ${chosen.length ? chosen.map((s) => `${s.name} (${s.pricingModel === 'tiered' && tier ? (isCustomTier ? 'price range not listed, Thomas to quote' : `${currency.format(tier.price)} for ${tier.rangeLabel} home`) : s.priceLabel})`).join(', ') : 'None selected'}`,
       `Total: ${isCustomTier ? 'Contract Help custom quote needed. ' : ''}${hasHourly ? `${currency.format(total)} minimum (Open Houses billed hourly beyond the minimum)` : currency.format(total)}`,
+      `Preferred contact: ${contact.contactMethods.length ? contact.contactMethods.join(', ') : 'No preference'}`,
     ].join('\n')
 
     const { error } = await supabase.from('leads').insert({
@@ -292,6 +302,25 @@ export default function ServiceSelector() {
             />
           </div>
         </div>
+
+        <fieldset>
+          <legend className="text-sm font-medium text-stone-700">
+            How would you like Thomas to contact you? <span className="text-stone-400">(choose any)</span>
+          </legend>
+          <div className="mt-2 flex flex-wrap gap-4">
+            {CONTACT_METHODS.map((method) => (
+              <label key={method} className="flex items-center gap-2 text-sm text-stone-700">
+                <input
+                  type="checkbox"
+                  checked={contact.contactMethods.includes(method)}
+                  onChange={() => toggleContactMethod(method)}
+                  className="rounded text-gold focus:ring-gold"
+                />
+                {method}
+              </label>
+            ))}
+          </div>
+        </fieldset>
 
         {status === 'error' && (
           <p className="text-sm text-red-600" role="alert">

@@ -85,6 +85,9 @@ export const SERVICES = [
   },
 ]
 
+// Ways a visitor can ask to be contacted; shown as checkboxes on both lead forms.
+export const CONTACT_METHODS = ['Phone call', 'Text', 'Email']
+
 export const AREAS = [
   {
     slug: 'idaho-falls',

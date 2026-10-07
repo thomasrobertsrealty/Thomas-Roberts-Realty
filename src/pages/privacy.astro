@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { SITE } from '../lib/site.js'
+
+const updated = 'October 7, 2026'
+---
+
+<Layout
+  title="Privacy Policy"
+  description={`How ${SITE.agentName} collects, uses, and protects your information, including website analytics and what happens when you share your email on this site.`}
+>
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="font-heading text-3xl text-brand">Privacy policy</h1>
+    <p class="mt-2 text-sm text-stone-500">Last updated {updated}</p>
+    <p class="mt-4 text-stone-600">
+      This site is operated by {SITE.agentName}, a licensed Idaho real estate agent with {SITE.brokerage}.
+      This page explains what information we collect, why, and what we do with it.
+    </p>
+
+    <div class="mt-8 rounded-lg bg-gold/10 p-6">
+      <h2 class="font-heading text-xl text-brand">Email &amp; contact sign-up: the deal, plainly</h2>
+      <ul class="mt-3 list-disc space-y-2 pl-5 text-stone-700">
+        <li>
+          <strong>What you're signing up for:</strong> when you submit the Get Started form or email us, you're
+          asking {SITE.agentName} to contact you about your request: flat-fee services, a free For Sale By Owner
+          consultation, or your question.
+        </li>
+        <li>
+          <strong>How we'll contact you:</strong> you choose. The forms let you pick phone call, text, email, or any
+          combination, and we'll use the ways you selected. Follow-up is about your request and is not a mass
+          mailing list.
+        </li>
+        <li>
+          <strong>We don't sell your information.</strong> Not your email, not your phone number, not your address.
+          We don't rent it or trade it either.
+        </li>
+        <li>
+          <strong>No obligation:</strong> sharing your info doesn't commit you to hiring anyone or paying anything.
+        </li>
+        <li>
+          <strong>Opt out anytime:</strong> reply "stop" or email
+          <a href={`mailto:${SITE.email}`} class="font-medium text-gold-dark">{SITE.email}</a>
+          and we'll stop contacting you and delete your information on request.
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-10 space-y-8 text-stone-600">
+      <div>
+        <h2 class="font-semibold text-stone-900">Information you give us</h2>
+        <p class="mt-2">
+          Only what you choose to share through the Get Started form: your name, email address, phone number
+          (optional), the city or area of the property, whether you're buying or selling, the services you're
+          interested in, and your timeline. If you email or call us directly, we also keep that correspondence.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold text-stone-900">How we use it</h2>
+        <p class="mt-2">
+          To respond to your request, schedule a consultation, provide quotes and the services you select, and
+          follow up about them. We don't use it for anything unrelated.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold text-stone-900">Website analytics (Google Analytics)</h2>
+        <p class="mt-2">
+          We use Google Analytics, a service of Google LLC, to understand how visitors use this site. When you visit,
+          Google Analytics sets cookies in your browser and collects information such as the pages you view, how long
+          you stay, how you arrived (for example from a search or another site), your approximate location (city
+          level), and your device, browser, and IP address.
+        </p>
+        <p class="mt-2">
+          We use this only to see which pages are useful and to improve the site. It is not used to identify you
+          personally, and we do not combine it with the information you submit in forms. Google may process this data
+          under its own privacy policy, available at
+          <a href="https://policies.google.com/privacy" class="font-medium text-gold-dark" rel="noopener">policies.google.com/privacy</a>.
+        </p>
+        <p class="mt-2">
+          <strong>Opting out:</strong> you can block or delete cookies in your browser settings, turn on your
+          browser's "Do Not Track" or privacy features, or install Google's
+          <a href="https://tools.google.com/dlpage/gaoptout" class="font-medium text-gold-dark" rel="noopener">browser add-on to opt out of Google Analytics</a>.
+          The site works normally either way.
+        </p>
+        <p class="mt-2">
+          Apart from analytics, this site does not use advertising cookies and does not sell data to advertisers. Our
+          hosting provider may also log basic technical information, such as IP address and browser type, to keep the
+          site secure and working.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold text-stone-900">Who sees your information</h2>
+        <p class="mt-2">
+          {SITE.agentName} and, where needed to provide a service you request, {SITE.brokerage}. Form submissions
+          are stored with our database provider (Supabase) and the site is hosted on Vercel; these providers process
+          data only to run the site for us. Analytics data is processed by Google as described above. We may disclose
+          information if required by law.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold text-stone-900">How long we keep it</h2>
+        <p class="mt-2">
+          Form and contact information is kept as long as needed to handle your request and any resulting
+          transaction, and for record-keeping required of real estate licensees. You can ask us to delete it sooner
+          at any time. Analytics data is retained according to our Google Analytics settings.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold text-stone-900">Your choices</h2>
+        <p class="mt-2">
+          You can ask to see, correct, or delete the information we hold about you, or opt out of contact, by emailing
+          <a href={`mailto:${SITE.email}`} class="font-medium text-gold-dark">{SITE.email}</a> or calling
+          <a href={`tel:${SITE.phoneRaw}`} class="font-medium text-gold-dark">{SITE.phone}</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold text-stone-900">Children</h2>
+        <p class="mt-2">This site is not intended for anyone under 18, and we don't knowingly collect their information.</p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold text-stone-900">Changes</h2>
+        <p class="mt-2">If this policy changes, we'll update the date at the top of this page.</p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold text-stone-900">Contact</h2>
+        <p class="mt-2">
+          {SITE.agentName}, {SITE.brokerage}, {SITE.addressLocality}, {SITE.addressRegion} &middot;
+          <a href={`mailto:${SITE.email}`} class="font-medium text-gold-dark">{SITE.email}</a> &middot; {SITE.phone}
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
