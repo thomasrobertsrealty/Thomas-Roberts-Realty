@@ -67,6 +67,22 @@ const realEstateAgentSchema = {
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
 
+    {
+      SITE.gaMeasurementId && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.gaMeasurementId}`} />
+          <script is:inline define:vars={{ gaId: SITE.gaMeasurementId }}>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+              dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+            gtag('config', gaId)
+          </script>
+        </>
+      )
+    }
+
     <JsonLd data={realEstateAgentSchema} />
     <slot name="head" />
   </head>
