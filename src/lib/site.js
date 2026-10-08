@@ -5,6 +5,9 @@ export const SITE = {
   // Google's docs flag as a canonicalization error.
   url: 'https://idahoforsalebyowner.com',
   // Google Analytics 4 Measurement ID (looks like G-XXXXXXXXXX). Leave empty to disable tracking.
+  // Set to true to hide the site from search engines (adds noindex to every page).
+  // Also swap public/robots.txt for the commented "private" version noted there.
+  hideFromSearch: true,
   gaMeasurementId: 'G-HSRVSKV2D9',
   agentName: 'Thomas Roberts',
   brokerage: 'Silvercreek Realty Group',
