@@ -2,12 +2,11 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 import { SERVICES, CONTACT_METHODS } from '../lib/site.js'
 
-const CONSULT_OPTION = 'Free For Sale By Owner consultation'
-const NEED_OPTIONS = [...SERVICES.map((s) => s.name), CONSULT_OPTION, 'Not sure yet']
-const TIMELINE_OPTIONS = ['Already listed', 'Planning to list soon', 'Just exploring']
+const CONSULT_OPTION = 'Free first-time buyer consultation'
+const NEED_OPTIONS = [...SERVICES.map((s) => s.name).filter((n) => n !== 'Free Buyer Consultation'), CONSULT_OPTION, 'Not sure yet']
+const TIMELINE_OPTIONS = ['Ready to buy now', 'Within 3 to 6 months', 'Within a year or more', 'Just exploring']
 
 const initialForm = {
-  role: 'Selling',
   needs: [],
   location: '',
   timeline: TIMELINE_OPTIONS[0],
@@ -55,8 +54,8 @@ export default function GetStartedForm() {
 
     const wantsConsult = form.needs.includes(CONSULT_OPTION)
     const notes = [
-      ...(wantsConsult ? ['*** FREE FOR SALE BY OWNER CONSULTATION REQUESTED ***'] : []),
-      `Buying or selling: ${form.role}`,
+      ...(wantsConsult ? ['*** FREE FIRST-TIME BUYER CONSULTATION REQUESTED ***'] : []),
+      'Buyer type: First-time buyer',
       `Wants help with: ${form.needs.length ? form.needs.join(', ') : 'Not specified'}`,
       `Timeline: ${form.timeline}`,
       `Preferred contact: ${form.contactMethods.length ? form.contactMethods.join(', ') : 'No preference'}`,
@@ -89,7 +88,7 @@ export default function GetStartedForm() {
     return (
       <p className="rounded-md bg-gold/10 p-4 text-brand" role="status">
         {onlyConsult
-          ? `Thanks, ${submittedName || 'there'}! Thomas will follow up shortly to schedule your free For Sale By Owner consultation on Google Meet. `
+          ? `Thanks, ${submittedName || 'there'}! Thomas will follow up shortly to schedule your free first-time buyer consultation on Google Meet. `
           : `Thanks, ${submittedName || 'there'}! Thomas will follow up shortly to go over options for ${needsLabel}. `}
         He responds the same business day for messages received during business hours.
       </p>
@@ -98,25 +97,6 @@ export default function GetStartedForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <fieldset>
-        <legend className="text-sm font-medium text-stone-700">Are you selling or buying?</legend>
-        <div className="mt-2 flex gap-4">
-          {['Selling', 'Buying'].map((option) => (
-            <label key={option} className="flex items-center gap-2 text-sm text-stone-700">
-              <input
-                type="radio"
-                name="role"
-                value={option}
-                checked={form.role === option}
-                onChange={handleChange}
-                className="text-gold focus:ring-gold"
-              />
-              {option}
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
       <fieldset>
         <legend className="text-sm font-medium text-stone-700">
           What do you need help with?
@@ -138,7 +118,7 @@ export default function GetStartedForm() {
 
       <div>
         <label htmlFor="location" className="block text-sm font-medium text-stone-700">
-          Where is the property? <span className="text-stone-400">(city or area)</span>
+          Where are you hoping to buy? <span className="text-stone-400">(city or area)</span>
         </label>
         <input
           id="location"

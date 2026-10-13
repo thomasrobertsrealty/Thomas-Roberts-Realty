@@ -1,11 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
-import ServiceSelector from '../components/ServiceSelector.jsx'
 import { SITE, SERVICES } from '../lib/site.js'
 
-// Service schema per offering, including real flat-fee pricing. Open Houses is billed hourly
-// with a minimum, so it uses a UnitPriceSpecification instead of a flat Offer price.
 const serviceSchemas = SERVICES.map((service) => ({
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -17,111 +14,60 @@ const serviceSchemas = SERVICES.map((service) => ({
     name: SITE.agentName,
   },
   areaServed: SITE.areaSentence,
-  offers:
-    service.pricingModel === 'hourly'
-      ? {
-          '@type': 'Offer',
-          priceSpecification: {
-            '@type': 'UnitPriceSpecification',
-            price: service.hourlyRate,
-            priceCurrency: 'USD',
-            unitText: 'HOUR',
-            eligibleQuantity: {
-              '@type': 'QuantitativeValue',
-              minValue: service.minimumHours,
-              unitCode: 'HUR',
-            },
-          },
-        }
-      : {
-          '@type': 'Offer',
-          price: service.priceValue,
-          priceCurrency: 'USD',
-        },
 }))
-// Tiered services publish a price range instead of a single price.
-serviceSchemas.forEach((schema, i) => {
-  const service = SERVICES[i]
-  if (service.pricingModel === 'tiered') {
-    schema.offers = {
-      '@type': 'AggregateOffer',
-      lowPrice: service.priceValue,
-      highPrice: service.priceHigh,
-      priceCurrency: 'USD',
-      offerCount: service.tiers.length,
-    }
-  }
-})
 ---
 
 <Layout
-  title="What I Offer: For Sale By Owner (FSBO) Services"
-  description={`Flat-fee services for For Sale By Owner (FSBO) sellers and buyers with ${SITE.agentName}: contract help, marketing, open houses, and market data — pick only what you need.`}
+  title="How I Help First-Time Home Buyers"
+  description={`How ${SITE.agentName} guides first-time home buyers in ${SITE.areaSentence}: a free consultation, home search and tours, offers and negotiation, and support from contract to closing.`}
 >
   <Fragment slot="head">
     {serviceSchemas.map((schema) => <JsonLd data={schema} />)}
   </Fragment>
 
   <section class="bg-brand py-12 text-center text-white">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">What I Offer</p>
-    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">Pick Only the Help You Need</h1>
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">How I Help</p>
+    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">Guidance From First Call to Closing Day</h1>
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-16">
     <p class="text-lg text-stone-700">
-      Thomas Roberts offers four services to FSBO sellers and buyers, available individually or
-      together at a flat rate: Contract Help ($3,000–$6,000 flat, based on home price), Marketing ($499 flat), Market Data
-      ($150 flat), and Open Houses ($65/hour, 2-hour minimum).
+      Thomas Roberts guides first-time home buyers in {SITE.areaSentence} through four stages:
+      a free buyer consultation, home search and tours, offers and negotiation, and support from
+      contract to closing.
     </p>
 
     <div class="mt-12 space-y-10">
       {
-        SERVICES.map((service) => (
+        SERVICES.map((service, i) => (
           <div class="border-b border-stone-200 pb-8 last:border-0">
-            <h2 class="font-heading text-xl text-brand">
-              {service.name} — <span class="text-gold-dark">{service.priceLabelFull}</span>
-            </h2>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">Step {i + 1}</p>
+            <h2 class="mt-1 font-heading text-xl text-brand">{service.name}</h2>
             <p class="mt-2 text-stone-600">{service.offerSentence}</p>
-            {service.tiers && (
-              <ul class="mt-3 space-y-1 text-stone-700">
-                {service.tiers.map((tier) => (
-                  <li>
-                    {tier.rangeLabel} home: <strong>${tier.price.toLocaleString('en-US')}</strong>
-                  </li>
-                ))}
-              </ul>
-            )}
-            {service.note && <p class="mt-2 text-sm text-stone-500">{service.note}</p>}
           </div>
         ))
       }
     </div>
+
+    <p class="mt-6 text-sm text-stone-500">
+      Thomas is not an attorney or a lender. For legal questions, ask a real estate attorney; for
+      loan options, talk with a mortgage lender.
+    </p>
   </section>
 
   <section class="bg-stone-50 py-16">
-    <div class="mx-auto max-w-3xl px-6">
-      <h2 class="font-heading text-2xl text-brand">Choose what fits your situation</h2>
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <h2 class="font-heading text-2xl text-brand">Ready to talk it through?</h2>
       <p class="mt-2 text-stone-600">
-        Select any combination of services below. Selecting Contract Help locks in the full
-        transaction scope described above — everything else can be mixed and matched.
+        Start with a free consultation. There's no obligation, and you can ask anything.
       </p>
-      <div class="mt-8 rounded-xl bg-white p-6 shadow-sm">
-        <ServiceSelector client:load />
-      </div>
+      <a href="/get-started" class="mt-4 inline-block font-medium text-gold-dark">
+        Book your free first-time buyer consultation &rarr;
+      </a>
+      <p class="mt-8 text-stone-700">Want the full picture of how buying a home works?</p>
+      <a href="/first-time-buyers" class="mt-3 inline-block font-medium text-gold-dark">
+        Read the first-time buyer guide &rarr;
+      </a>
     </div>
-  </section>
-
-  <section class="mx-auto max-w-3xl px-6 py-16 text-center">
-    <p class="text-stone-700">
-      Wondering why this beats hiring an attorney, a flat-fee MLS company, and a title company
-      separately?
-    </p>
-    <a href="/fsbo-help" class="mt-3 inline-block font-medium text-gold-dark">
-      See how this beats hiring an attorney or MLS company separately &rarr;
-    </a>
-    <p class="mt-8 text-stone-700">Not sure yet which services make sense for you?</p>
-    <a href="/get-started" class="mt-3 inline-block font-medium text-gold-dark">
-      Not sure what to start with? &rarr;
-    </a>
   </section>
 </Layout>

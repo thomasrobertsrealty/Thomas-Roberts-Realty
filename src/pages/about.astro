@@ -22,7 +22,7 @@ const personSchema = {
 
 <Layout
   title="About Me"
-  description={`Meet ${SITE.agentName}, a licensed real estate agent with ${SITE.brokerage} offering flat-fee For Sale By Owner (FSBO) services in ${SITE.areaSentence}.`}
+  description={`Meet ${SITE.agentName}, a licensed real estate agent with ${SITE.brokerage} who guides first-time home buyers in ${SITE.areaSentence}.`}
 >
   <Fragment slot="head">
     <JsonLd data={personSchema} />
@@ -30,7 +30,7 @@ const personSchema = {
 
   <section class="bg-brand py-12 text-center text-white">
     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">About Thomas</p>
-    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">A Local Agent Built for FSBO</h1>
+    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">A Local Agent for First-Time Buyers</h1>
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-16">
@@ -44,16 +44,13 @@ const personSchema = {
       <div class="space-y-4 text-stone-700">
         <p class="font-medium text-stone-900">
           {SITE.agentName} is a licensed real estate agent with {SITE.brokerage} based in
-          Southeast Idaho, focused on helping For Sale By Owner (FSBO) sellers and buyers handle their own
-          transactions with flat-fee support, letting them pick only the services they need
-          instead of a traditional commission.
+          Southeast Idaho, focused on helping first-time home buyers understand the process and
+          buy with confidence.
         </p>
         <p>
-          Most FSBO sellers and buyers aren't against getting help — they're against paying a
-          full commission for a bundle of services they don't all need. Thomas built his
-          flat-fee model so FSBO clients can keep control of their own sale or purchase while
-          filling in exactly where they're exposed, which is usually contracts and marketing
-          reach.
+          Buying a first home is exciting and stressful at the same time. Thomas explains each
+          step in plain language, tells you what to expect next, and stays with you from the first
+          conversation through closing day.
         </p>
       </div>
     </div>
@@ -65,18 +62,16 @@ const personSchema = {
       <ul class="space-y-2">
         <li>&bull; {SITE.licenseNumber} <span class="text-stone-400">[TODO: add license number]</span></li>
         <li>&bull; {SITE.brokerage}</li>
-        <li>&bull; Flat-fee FSBO support: contract help, marketing, open houses, market data</li>
-        <li>&bull; Works with both FSBO sellers and FSBO buyers</li>
+        <li>&bull; First-time buyer guidance: consultation, home search, offers, and closing</li>
       </ul>
     </div>
 
     <div class="mt-10 rounded-lg border border-stone-200 p-6">
       <p class="text-stone-700">
         Outside of real estate, I like being outdoors around Southeast Idaho as much as
-        possible — it's a big part of why I like helping people stay local instead of getting
-        priced out by fees that don't match what they actually need. If you're on the fence
-        about doing this yourself, that's exactly the conversation I'd rather have with you
-        before you commit to anything.
+        possible — it's a big part of why I like helping people put down roots here. If you're
+        wondering whether you're ready to buy, that's exactly the conversation I'd rather have
+        with you before you commit to anything.
       </p>
     </div>
 
@@ -92,9 +87,9 @@ const personSchema = {
     </div>
 
     <div class="mt-12 rounded-lg bg-stone-50 p-6 text-center">
-      <p class="text-stone-700">See exactly what flat-fee help looks like.</p>
+      <p class="text-stone-700">See how I help first-time buyers.</p>
       <a href="/what-i-offer" class="mt-3 inline-block font-medium text-gold-dark">
-        What I offer &rarr;
+        How I help &rarr;
       </a>
     </div>
   </section>

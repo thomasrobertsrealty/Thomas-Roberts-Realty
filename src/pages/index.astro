@@ -2,16 +2,16 @@
 import Layout from '../layouts/Layout.astro'
 import { Image, getImage } from 'astro:assets'
 import JsonLd from '../components/JsonLd.astro'
-import heroPhoto from '../assets/fsbo-home-hero.jpg'
+import heroPhoto from '../assets/first-time-home-hero.webp'
 import { SITE, SERVICES } from '../lib/site.js'
 
-const heroAlt = `Modern craftsman-style home with white board-and-batten siding, stone accents, and a dark garage door, with a red and white For Sale By Owner yard sign on the lawn, representing FSBO homes in ${SITE.areaSentence}`
+const heroAlt = `Modern craftsman-style home with white board-and-batten siding, stone accents, and a dark garage door, landscaped front yard, and blue sky, representing homes for first-time buyers in ${SITE.areaSentence}`
 const heroOptimized = await getImage({ src: heroPhoto, format: 'webp', width: 1600 })
 const heroSchema = {
   '@context': 'https://schema.org',
   '@type': 'ImageObject',
   contentUrl: new URL(heroOptimized.src, SITE.url).href,
-  name: 'For Sale By Owner home in Southeast Idaho',
+  name: 'Home for first-time buyers in Southeast Idaho',
   description: heroAlt,
   contentLocation: SITE.areaSentence,
   creator: { '@type': 'RealEstateAgent', name: SITE.agentName },
@@ -19,8 +19,8 @@ const heroSchema = {
 ---
 
 <Layout
-  title="Flat-Fee For Sale By Owner (FSBO) Real Estate Help"
-  description={`Thomas Roberts offers flat-fee support for For Sale By Owner (FSBO) sellers and buyers in ${SITE.areaSentence} — choose only what you need from contract review, marketing, open houses, and market data.`}
+  title="First-Time Home Buyer Help in Southeast Idaho"
+  description={`Thomas Roberts is a licensed real estate agent who guides first-time home buyers in ${SITE.areaSentence} from budget and pre-approval through home search, offer, and closing.`}
 >
   <Fragment slot="head">
     <JsonLd data={heroSchema} />
@@ -39,17 +39,16 @@ const heroSchema = {
     <div class="absolute inset-0 bg-brand-dark/55" aria-hidden="true"></div>
     <div class="relative mx-auto max-w-5xl px-6 [text-shadow:0_1px_8px_rgba(0,0,0,0.55)]">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-        Flat-Fee FSBO Support
+        First-Time Home Buyers
       </p>
-      <h1 class="mt-4 whitespace-nowrap font-heading text-[clamp(1.1rem,4.8vw,3rem)] leading-tight">
-        Sell or Buy Without an Agent —<br />
-        Get Only the <em class="font-heading font-medium not-italic text-gold italic">Help You Actually Need</em>
+      <h1 class="mt-4 font-heading text-[clamp(1.5rem,5vw,3rem)] leading-tight">
+        Buying Your First Home?<br />
+        Get a Guide Who <em class="font-heading font-medium not-italic text-gold italic">Explains Every Step</em>
       </h1>
       <p class="mx-auto mt-6 max-w-xl text-stone-200">
-        {SITE.agentName} is a licensed real estate agent in Idaho Falls, Idaho who offers
-        flat-fee support for FSBO sellers and buyers — choose only what you need from contract
-        review, marketing, open houses, and market data, priced individually instead of a full
-        commission.
+        {SITE.agentName} is a licensed real estate agent in Idaho Falls, Idaho who helps
+        first-time home buyers understand the process and buy with confidence — from budget and
+        pre-approval through home search, offer, inspection, and closing.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a
@@ -62,13 +61,13 @@ const heroSchema = {
           href="/what-i-offer"
           class="rounded-md border border-white/40 px-6 py-3 font-semibold text-white hover:border-white"
         >
-          See What I Offer
+          See How I Help
         </a>
       </div>
       <p class="mt-6 text-stone-200">
-        New to FSBO?{' '}
+        New to buying a home?{' '}
         <a href="/get-started" class="font-medium text-gold underline">
-          Book your free For Sale By Owner consultation
+          Book your free first-time buyer consultation
         </a>{' '}
         — a free online call, no obligation.
       </p>
@@ -78,39 +77,37 @@ const heroSchema = {
 
   <section class="py-16">
     <div class="mx-auto max-w-3xl px-6 text-center">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">Why For Sale By Owner</p>
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">Why Work With Me</p>
       <h2 class="mt-2 font-heading text-2xl text-brand sm:text-3xl">
-        You Shouldn't Pay for a Bundle You Don't Need
+        Your First Home Purchase Shouldn't Feel Like Guesswork
       </h2>
       <p class="mt-4 text-stone-600">
-        Full-service agents charge commission for a bundle of services most FSBO sellers don't
-        want or need all of. Instead of paying a percentage of the sale price for a full-service
-        agent, FSBO sellers and buyers can hire {SITE.agentName} for just the specific parts of
-        the transaction where they want expert help.
+        Buying a first home means new vocabulary, big deadlines, and a lot of paperwork.
+        {SITE.agentName} explains each step in plain language, tells you what to expect next, and
+        keeps you on track so you can make decisions without feeling rushed or lost.
       </p>
-      <a href="/fsbo-help" class="mt-4 inline-block text-sm font-medium text-gold-dark">
-        See how this compares to hiring an attorney or flat-fee MLS company &rarr;
+      <a href="/first-time-buyers" class="mt-4 inline-block text-sm font-medium text-gold-dark">
+        Read the first-time buyer guide &rarr;
       </a>
     </div>
   </section>
 
   <section class="bg-stone-50 py-16">
     <div class="mx-auto max-w-5xl px-6">
-      <h2 class="text-center font-heading text-2xl text-brand sm:text-3xl">What I Offer</h2>
+      <h2 class="text-center font-heading text-2xl text-brand sm:text-3xl">How I Help</h2>
       <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {
           SERVICES.map((service) => (
             <div class="rounded-lg border border-stone-200 bg-white p-5">
               <h3 class="font-semibold text-stone-900">{service.name}</h3>
               <p class="mt-2 text-sm text-stone-600">{service.homeTeaser}</p>
-              <p class="mt-2 text-sm font-medium text-gold-dark">{service.priceLabel}</p>
             </div>
           ))
         }
       </div>
       <div class="mt-8 text-center">
         <a href="/what-i-offer" class="text-sm font-medium text-gold-dark">
-          See all services and pick what fits &rarr;
+          See the full buying process &rarr;
         </a>
       </div>
     </div>
@@ -125,9 +122,9 @@ const heroSchema = {
 
   <section class="bg-brand py-16 text-white">
     <div class="mx-auto max-w-3xl px-6 text-center">
-      <h2 class="font-heading text-2xl">Not sure what you need?</h2>
+      <h2 class="font-heading text-2xl">Not sure where to start?</h2>
       <p class="mt-2 text-stone-200">
-        See what fits your situation — no pressure, no obligation.
+        Book a free consultation — no pressure, no obligation.
       </p>
       <div class="mt-6 flex flex-wrap justify-center gap-4">
         <a href="/get-started" class="text-sm font-medium text-gold">Get started &rarr;</a>

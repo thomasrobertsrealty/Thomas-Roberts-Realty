@@ -15,73 +15,47 @@ export const SITE = {
   licenseNumber: 'Licensed Idaho Real Estate Agent',
   addressLocality: 'Idaho Falls',
   addressRegion: 'ID',
-  tagline: 'Sell or Buy Without an Agent — Get Only the Help You Actually Need',
+  tagline: 'First-Time Home Buying in Southeast Idaho, Explained and Guided',
   // Core, repeatable GEO facts — reused verbatim in schema and phrased consistently across pages.
   areaSentence:
     'Idaho Falls, Rexburg, Rigby, Ammon, Shelley, Blackfoot, and surrounding areas',
   responseCommitment: 'Thomas responds the same business day for messages received during business hours.',
 }
 
-// Flat-fee services. Every field renders as real, visible HTML text (not just inside the
-// interactive selector) so search and AI crawlers can read the current prices.
+// First-time buyer services. Every field renders as real, visible HTML text so search and AI
+// crawlers can read it. Add price fields here later if you want fees shown on the site.
 export const SERVICES = [
   {
-    slug: 'contract-help',
-    name: 'Contract Help',
-    priceLabel: '$3,000–$6,000 flat',
-    priceLabelFull: '$3,000–$6,000 flat, based on home price',
-    pricingModel: 'tiered',
-    priceValue: 3000,
-    priceHigh: 6000,
-    // Flat fee by home price range. Edit here and every page, schema, and the selector update.
-    tiers: [
-      { id: 'tier-1', rangeLabel: '$200,000 – $400,000', price: 3000 },
-      { id: 'tier-2', rangeLabel: '$400,000 – $600,000', price: 4500 },
-      { id: 'tier-3', rangeLabel: '$600,000 – $1,000,000', price: 6000 },
-    ],
-    // Shown last in the selector's dropdown for homes outside the tiers; no price, Thomas quotes it.
-    customTier: { id: 'custom', rangeLabel: "My price range isn't listed" },
+    slug: 'buyer-consultation',
+    name: 'Free Buyer Consultation',
     homeTeaser:
-      'Full contract review and paperwork prep from offer to closing, handled as one complete package.',
+      'A free 20 to 30 minute video call covering the buying process, your budget, and what to do first.',
     offerSentence:
-      "Thomas reviews and helps prepare all of the paperwork and legal documents involved in a real estate transaction, from initial offer through closing, for a flat fee based on your home's price: $3,000 for homes priced $200,000 to $400,000, $4,500 for $400,000 to $600,000, and $6,000 for $600,000 to $1,000,000.",
-    note: "If you choose contract support, it covers every document in your transaction — so nothing falls through the cracks and no paperwork is left half-reviewed.",
-    fullScopeOnly: true,
+      'Thomas offers a free 20 to 30 minute buyer consultation on Google Meet that walks first-time home buyers through the buying process, budgeting, pre-approval, and what to expect at each step, with no obligation.',
   },
   {
-    slug: 'marketing',
-    name: 'Marketing',
-    priceLabel: '$499 flat',
-    priceLabelFull: '$499 flat',
-    pricingModel: 'flat',
-    priceValue: 499,
-    homeTeaser: 'Professional listing photos, a written description, and syndication to the MLS and major listing sites.',
+    slug: 'home-search',
+    name: 'Home Search & Tours',
+    homeTeaser:
+      'Listings matched to your budget and must-haves, with showings scheduled and toured with you.',
     offerSentence:
-      "Thomas's marketing service includes professional listing photos, a written listing description, and syndication to the MLS and major listing sites to get a FSBO listing in front of buyers, for a flat fee of $499.",
+      'Thomas helps first-time buyers find homes that fit their budget and must-haves, sets up showings, and tours homes with them, pointing out what to look for and what to question.',
   },
   {
-    slug: 'open-houses',
-    name: 'Open Houses',
-    priceLabel: '$65/hr, 2-hr min',
-    priceLabelFull: '$65/hour, 2-hour minimum',
-    pricingModel: 'hourly',
-    hourlyRate: 65,
-    minimumHours: 2,
-    minimumBooking: 130,
-    homeTeaser: 'Thomas hosts and runs your open house from start to finish, so you don’t have to.',
+    slug: 'offers-negotiation',
+    name: 'Offers & Negotiation',
+    homeTeaser:
+      'Pricing guidance with comparable sales, a strong offer, and negotiation on your behalf.',
     offerSentence:
-      'Thomas hosts and runs open houses on the seller’s behalf, handling scheduling, signage, and in-person buyer questions, billed at $65 per hour with a two-hour minimum ($130 minimum booking).',
+      'Thomas provides comparable sales data and pricing guidance, helps first-time buyers write a competitive offer, and negotiates price and terms on their behalf.',
   },
   {
-    slug: 'market-data',
-    name: 'Market Data',
-    priceLabel: '$150 flat',
-    priceLabelFull: '$150 flat',
-    pricingModel: 'flat',
-    priceValue: 150,
-    homeTeaser: 'Comparable sales, pricing guidance, and local market trends for your specific area.',
+    slug: 'contract-to-closing',
+    name: 'Contract to Closing',
+    homeTeaser:
+      'Paperwork, inspections, appraisal, and deadlines handled and explained from accepted offer to keys.',
     offerSentence:
-      'Thomas provides comparable sales data, pricing guidance, and local market trends to help FSBO sellers and buyers price and negotiate with confidence, for a flat fee of $150.',
+      'Thomas guides first-time buyers from accepted offer to closing, coordinating the contract paperwork, inspection, appraisal, lender, and title deadlines and explaining each step along the way.',
   },
 ]
 
@@ -130,7 +104,7 @@ export const AREAS = [
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/what-i-offer', label: 'What I Offer' },
-  { href: '/fsbo-help', label: 'FSBO Help' },
+  { href: '/first-time-buyers', label: 'First-Time Buyers' },
   { href: '/about', label: 'About' },
   { href: '/faq', label: 'FAQ' },
 ]

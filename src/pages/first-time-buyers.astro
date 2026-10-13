@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro'
+import JsonLd from '../components/JsonLd.astro'
+import { SITE } from '../lib/site.js'
+
+const steps = [
+  {
+    title: 'Get your finances in order',
+    body: 'Check your credit, figure out a monthly payment you are comfortable with, and plan for a down payment and closing costs. A mortgage lender can look at your numbers and tell you what you qualify for.',
+  },
+  {
+    title: 'Get pre-approved',
+    body: 'A pre-approval letter from a lender shows sellers you are a serious buyer and sets your price range before you start touring.',
+  },
+  {
+    title: 'Search and tour homes',
+    body: 'List your must-haves and nice-to-haves, then tour homes with Thomas, who points out what to look for beyond the staging.',
+  },
+  {
+    title: 'Make an offer',
+    body: 'Using comparable sales, Thomas helps you choose a price and terms that are competitive without overpaying.',
+  },
+  {
+    title: 'Inspection and appraisal',
+    body: 'Once your offer is accepted, a home inspection and the lender appraisal check the home’s condition and value. You can negotiate repairs based on what the inspection finds.',
+  },
+  {
+    title: 'Close and get your keys',
+    body: 'You sign final paperwork at the title company, bring your closing funds, and the home is yours.',
+  },
+]
+
+const faqs = [
+  {
+    q: 'How do I buy my first home in Idaho Falls?',
+    a: `The usual path is to get pre-approved with a lender, search and tour homes, make an offer, complete the inspection and appraisal, and close. ${SITE.agentName} guides first-time buyers through each step in ${SITE.areaSentence}.`,
+  },
+  {
+    q: 'How much do I need for a down payment?',
+    a: 'It depends on the loan type. Some loans allow low down payments, and a lender can tell you what fits your situation. You should also budget for closing costs and the inspection.',
+  },
+  {
+    q: 'Do I need a real estate agent to buy a home?',
+    a: `You are not required to use one, but an agent helps with search, pricing, negotiation, and keeping the contract deadlines on track. ${SITE.agentName} explains every step so first-time buyers know what they are signing.`,
+  },
+  {
+    q: 'Can I get help before I am ready to buy?',
+    a: `Yes. ${SITE.agentName} offers a free 20 to 30 minute buyer consultation by video call, even if you are months away from buying.`,
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+---
+
+<Layout
+  title="First-Time Home Buyer Guide"
+  description={`A plain-language guide for first-time home buyers in ${SITE.areaSentence}: the steps from budget and pre-approval to offer and closing, with local help from ${SITE.agentName}.`}
+>
+  <Fragment slot="head">
+    <JsonLd data={faqSchema} />
+  </Fragment>
+
+  <section class="bg-brand py-12 text-center text-white">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">First-Time Buyers</p>
+    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">Buying Your First Home: The Steps</h1>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <p class="text-lg text-stone-700">
+      Thomas Roberts helps first-time home buyers in {SITE.areaSentence} understand the buying
+      process and make confident decisions, from budget and pre-approval through home search,
+      offer, and closing.
+    </p>
+    <p class="mt-4 text-stone-600">
+      Here is what the process looks like, so nothing comes as a surprise.
+    </p>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">The path to your first home</h2>
+      <ol class="mt-8 space-y-6">
+        {
+          steps.map((step, i) => (
+            <li class="flex gap-4">
+              <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gold font-semibold text-brand-dark">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="font-semibold text-stone-900">{step.title}</h3>
+                <p class="mt-1 text-stone-600">{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="font-heading text-2xl text-brand">Common questions</h2>
+    <div class="mt-8 space-y-8">
+      {
+        faqs.map((item) => (
+          <div>
+            <h3 class="font-semibold text-stone-900">{item.q}</h3>
+            <p class="mt-2 text-stone-600">{item.a}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-gold/10 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">Not sure where to start? Talk it through first</h2>
+      <p class="mt-4 text-stone-600">
+        Book a free buyer consultation. Thomas spends 20 to 30 minutes with you on a Google Meet
+        video call covering the buying process, your budget, pre-approval, and what to do first.
+        There's no obligation.
+      </p>
+      <p class="mt-3 text-sm text-stone-500">
+        Thomas is not an attorney or a lender. For legal questions, ask a real estate attorney; for
+        loan options, talk with a mortgage lender.
+      </p>
+      <a href="/get-started" class="mt-4 inline-block font-medium text-gold-dark">
+        Book your free first-time buyer consultation &rarr;
+      </a>
+    </div>
+  </section>
+
+  <section class="bg-brand py-16 text-white">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <h2 class="font-heading text-2xl">See how I can help</h2>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a href="/what-i-offer" class="text-sm font-medium text-gold">How I Help &rarr;</a>
+        <a href="/get-started" class="text-sm font-medium text-gold">Get Started &rarr;</a>
+      </div>
+    </div>
+  </section>
+</Layout>
