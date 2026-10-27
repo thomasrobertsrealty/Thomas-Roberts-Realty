@@ -66,7 +66,7 @@ export default function GetStartedForm() {
       email: form.email,
       phone: form.phone || null,
       address: form.location || null,
-      source: wantsConsult ? 'get_started_form_fsbo_consultation' : 'get_started_form',
+      source: wantsConsult ? 'get_started_form_buyer_consultation' : 'get_started_form',
       notes,
     })
 
