@@ -33,4 +33,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://idahoforsalebyowner.com/sitemap-index.xml
+Sitemap: https://thomasrobertsrealty.co/sitemap-index.xml
