@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://idahoforsalebyowner.com',
+  site: 'https://thomasrobertsrealty.co',
   redirects: { '/fsbo-help': '/first-time-buyers' },
   integrations: [
     react(),

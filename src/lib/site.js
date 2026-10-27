@@ -1,9 +1,9 @@
 export const SITE = {
-  // Vercel is configured with the apex idahoforsalebyowner.com as the primary domain (www and the
-  // old thomasrobertsrealty.co domains 308-redirect here) — this must match, or canonical tags/sitemap
+  // Vercel is configured with the apex thomasrobertsrealty.co as the primary domain (www and the
+  // old idahoforsalebyowner.com domain redirect here) - this must match, or canonical tags/sitemap
   // end up pointing at a URL that redirects instead of the page that actually serves 200, which
   // Google's docs flag as a canonicalization error.
-  url: 'https://idahoforsalebyowner.com',
+  url: 'https://thomasrobertsrealty.co',
   // Google Analytics 4 Measurement ID (looks like G-XXXXXXXXXX). Leave empty to disable tracking.
   gaMeasurementId: 'G-HSRVSKV2D9',
   agentName: 'Thomas Roberts',
