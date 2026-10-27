@@ -9,7 +9,11 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://idahoforsalebyowner.com',
   redirects: { '/fsbo-help': '/first-time-buyers' },
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    // Keep the private login pages out of the sitemap.
+    sitemap({ filter: (page) => !page.includes('/my-plan') && !page.includes('/admin') }),
+  ],
 
   vite: {
     plugins: [tailwindcss()]

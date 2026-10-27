@@ -105,6 +105,7 @@ export const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/what-i-offer', label: 'What I Offer' },
   { href: '/first-time-buyers', label: 'First-Time Buyers' },
+  { href: '/my-plan', label: 'My Plan' },
   { href: '/about', label: 'About' },
   { href: '/faq', label: 'FAQ' },
 ]

@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro'
+import BuyerPortal from '../components/BuyerPortal.jsx'
+import { SITE } from '../lib/site.js'
+---
+
+<Layout
+  title="My Home Buying Plan"
+  description={`A free home buying cost calculator and step-by-step readiness checklist for first-time buyers, with help from ${SITE.agentName}.`}
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <section class="bg-brand py-12 text-center text-white">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">First-Time Buyer Tools</p>
+    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">My Home Buying Plan</h1>
+    <p class="mx-auto mt-3 max-w-xl px-6 text-stone-200">
+      Estimate your monthly cost, see what to do before you buy, and know where you stand.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-6 py-12">
+    <BuyerPortal client:load />
+  </section>
+</Layout>
