@@ -3,66 +3,143 @@ import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
 import { SITE } from '../lib/site.js'
 
+const agent = SITE.agentName
+const brokerage = SITE.brokerage
+const area = SITE.areaSentence
+
+// Each step is written so it still makes sense if read on its own.
 const steps = [
   {
     title: 'Get your finances in order',
-    body: 'Check your credit, figure out a monthly payment you are comfortable with, and plan for a down payment and closing costs. A mortgage lender can look at your numbers and tell you what you qualify for.',
+    body: 'Before you buy a home, check your credit, decide on a monthly payment you are comfortable with, and plan for a down payment and closing costs. A mortgage lender can review your numbers and tell you what you qualify for.',
   },
   {
     title: 'Get pre-approved',
-    body: 'A pre-approval letter from a lender shows sellers you are a serious buyer and sets your price range before you start touring.',
+    body: 'A pre-approval is a letter from a mortgage lender saying how much they are likely to lend you. It shows sellers you are a serious buyer and sets your price range before you start touring homes.',
   },
   {
     title: 'Search and tour homes',
-    body: 'List your must-haves and nice-to-haves, then tour homes with Thomas, who points out what to look for beyond the staging.',
+    body: `List your must-haves and nice-to-haves for a home, then tour homes with ${agent}, who points out what to look for beyond the staging.`,
   },
   {
     title: 'Make an offer',
-    body: 'Using comparable sales, Thomas helps you choose a price and terms that are competitive without overpaying.',
+    body: `Once you find a home, ${agent} uses comparable sales (recent sales of similar nearby homes) to help you choose a price and terms that are competitive without overpaying.`,
   },
   {
     title: 'Inspection and appraisal',
-    body: 'Once your offer is accepted, a home inspection and the lender appraisal check the home’s condition and value. You can negotiate repairs based on what the inspection finds.',
+    body: `After the seller accepts your offer, a home inspection and the lender’s appraisal check the home’s condition and value. You can negotiate repairs based on what the inspection finds.`,
   },
   {
     title: 'Close and get your keys',
-    body: 'You sign final paperwork at the title company, bring your closing funds, and the home is yours.',
+    body: 'At closing, you sign the final paperwork at the title company and bring your closing funds. After that, the home is yours and you get the keys.',
   },
 ]
 
+// Minimum down payment by loan type, shown as a table inside the down payment FAQ.
+const downPaymentRows = [
+  {
+    loan: 'Conventional',
+    down: 'As low as 3% for eligible buyers (20% avoids mortgage insurance)',
+    note: 'Mortgage insurance is generally required with less than 20% down',
+  },
+  {
+    loan: 'FHA',
+    down: '3.5%',
+    note: 'Often used by buyers with lower credit scores',
+  },
+  {
+    loan: 'VA',
+    down: '0%',
+    note: 'For eligible veterans and service members',
+  },
+  {
+    loan: 'USDA',
+    down: '0%',
+    note: 'For eligible homes in qualifying rural areas',
+  },
+]
+
+// Each answer is a list of blocks: { text, lead? }, { table: true }, or { note: true, text }.
+// Every answer names its subject, so it makes sense even if read without the rest of the page.
 const faqs = [
   {
     q: 'How do I buy my first home in Idaho Falls?',
-    a: `The usual path is to get pre-approved with a lender, search and tour homes, make an offer, complete the inspection and appraisal, and close. ${SITE.agentName} guides first-time buyers through each step in ${SITE.areaSentence}.`,
+    blocks: [
+      {
+        text: `To buy your first home in Idaho Falls, you get your finances in order, get pre-approved with a mortgage lender, search and tour homes, make an offer, complete the home inspection and appraisal, and close. ${agent}, a licensed Idaho real estate agent with ${brokerage}, guides first-time buyers through each step in ${area}.`,
+      },
+    ],
   },
   {
-    q: 'How much do I need for a down payment?',
-    a: 'It depends on the loan type. Some loans allow low down payments, and a lender can tell you what fits your situation. You should also budget for closing costs and the inspection.',
+    q: 'How much do I need for a down payment when buying my first home in Idaho?',
+    blocks: [
+      { text: 'The down payment depends on the type of loan you choose.' },
+      {
+        lead: 'Conventional loans:',
+        text: `A conventional loan is a mortgage that isn’t backed by the government. The traditional down payment is 20%, which also lets you avoid private mortgage insurance (PMI), an extra monthly cost that protects the lender. Eligible buyers can put down as little as 3% through programs backed by Fannie Mae and Freddie Mac, such as Conventional 97, HomeReady, HomeOne, and Home Possible. With less than 20% down, PMI is generally required. Eligibility varies by program. Lenders often look for a credit score of around 620 or higher, some programs have income limits, and some require first-time buyer status or a homeownership education course. The home usually needs to be a one-unit primary residence.`,
+      },
+      {
+        lead: 'Other loan options:',
+        text: 'FHA loans require at least 3.5% down for many qualified borrowers. VA loans (for eligible veterans and service members) and USDA loans (for eligible homes in qualifying rural areas) can require 0% down.',
+      },
+      { table: true },
+      {
+        lead: 'Other costs:',
+        text: 'A down payment is only part of the cash you need. You should also plan for closing costs and a home inspection.',
+      },
+      {
+        text: `A mortgage lender can tell you which loan and down payment fit your situation. ${agent} can help you plan the rest of the buying process.`,
+      },
+      {
+        note: true,
+        text: `${agent} is not a lender. Loan requirements vary by lender, so confirm the details with a mortgage lender.`,
+      },
+    ],
+    source: {
+      href: 'https://www.hud.gov/helping-americans/buying-a-home',
+      label: 'HUD: Buying a Home',
+      prefix: 'Learn more about FHA loans and buying a home:',
+    },
   },
   {
     q: 'Do I need a real estate agent to buy a home?',
-    a: `You are not required to use one, but an agent helps with search, pricing, negotiation, and keeping the contract deadlines on track. ${SITE.agentName} explains every step so first-time buyers know what they are signing.`,
+    blocks: [
+      {
+        text: `You are not required to use a real estate agent to buy a home, but an agent helps with searching for homes, pricing, negotiation, and keeping contract deadlines on track. ${agent}, a licensed agent with ${brokerage}, explains every step so first-time buyers know what they are signing.`,
+      },
+    ],
   },
   {
-    q: 'Can I get help before I am ready to buy?',
-    a: `Yes. ${SITE.agentName} offers a free 20 to 30 minute buyer consultation by video call, even if you are months away from buying.`,
+    q: 'Can I get help before I am ready to buy a home?',
+    blocks: [
+      {
+        text: `Yes. ${agent} offers first-time buyers a free 20 to 30 minute buyer consultation by video call, even if you are months away from buying a home. There is no obligation.`,
+      },
+    ],
   },
 ]
 
+// Plain-text version of each answer for the FAQ structured data (tables and links are left out).
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faqs.map((item) => ({
     '@type': 'Question',
     name: item.q,
-    acceptedAnswer: { '@type': 'Answer', text: item.a },
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.blocks
+        .filter((b) => b.text)
+        .map((b) => (b.lead ? `${b.lead} ${b.text}` : b.text))
+        .join(' '),
+    },
   })),
 }
 ---
 
 <Layout
   title="First-Time Home Buyer Guide"
-  description={`A plain-language guide for first-time home buyers in ${SITE.areaSentence}: the steps from budget and pre-approval to offer and closing, with local help from ${SITE.agentName}.`}
+  description={`A plain-language guide for first-time home buyers in ${area}: the steps from budget and pre-approval to offer and closing, with local help from ${agent}.`}
 >
   <Fragment slot="head">
     <JsonLd data={faqSchema} />
@@ -70,23 +147,26 @@ const faqSchema = {
 
   <section class="bg-brand py-12 text-center text-white">
     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">First-Time Buyers</p>
-    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">Buying Your First Home: The Steps</h1>
+    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">
+      Buying Your First Home in Southeast Idaho: The Steps
+    </h1>
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-16">
     <p class="text-lg text-stone-700">
-      Thomas Roberts helps first-time home buyers in {SITE.areaSentence} understand the buying
-      process and make confident decisions, from budget and pre-approval through home search,
-      offer, and closing.
+      To buy your first home in Idaho Falls, you get your finances in order, get pre-approved by a
+      lender, tour homes, make an offer, complete the inspection and appraisal, then close and get
+      your keys. Here is what each step looks like, so nothing comes as a surprise.
     </p>
     <p class="mt-4 text-stone-600">
-      Here is what the process looks like, so nothing comes as a surprise.
+      {agent} is a licensed Idaho real estate agent with {brokerage}, helping first-time buyers in
+      {area} understand the buying process and make confident decisions.
     </p>
   </section>
 
   <section class="bg-stone-50 py-16">
     <div class="mx-auto max-w-3xl px-6">
-      <h2 class="font-heading text-2xl text-brand">The path to your first home</h2>
+      <h2 class="font-heading text-2xl text-brand">{`The ${steps.length} Steps to Buying Your First Home`}</h2>
       <ol class="mt-8 space-y-6">
         {
           steps.map((step, i) => (
@@ -106,13 +186,66 @@ const faqSchema = {
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-16">
-    <h2 class="font-heading text-2xl text-brand">Common questions</h2>
-    <div class="mt-8 space-y-8">
+    <h2 class="font-heading text-2xl text-brand">
+      First-Time Home Buyer Questions in Idaho Falls and Southeast Idaho
+    </h2>
+    <div class="mt-8 space-y-10">
       {
         faqs.map((item) => (
           <div>
             <h3 class="font-semibold text-stone-900">{item.q}</h3>
-            <p class="mt-2 text-stone-600">{item.a}</p>
+            {item.blocks.map((block) =>
+              block.table ? (
+                <div class="mt-4 overflow-x-auto">
+                  <table class="w-full border-collapse text-left text-sm">
+                    <caption class="sr-only">Minimum down payment by loan type</caption>
+                    <thead class="bg-stone-100 text-stone-900">
+                      <tr>
+                        <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">
+                          Loan type
+                        </th>
+                        <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">
+                          Minimum down payment
+                        </th>
+                        <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">
+                          Good to know
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-stone-600">
+                      {downPaymentRows.map((row) => (
+                        <tr>
+                          <th scope="row" class="border border-stone-200 px-3 py-2 font-medium text-stone-900">
+                            {row.loan}
+                          </th>
+                          <td class="border border-stone-200 px-3 py-2">{row.down}</td>
+                          <td class="border border-stone-200 px-3 py-2">{row.note}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : block.note ? (
+                <p class="mt-3 text-sm text-stone-500">{block.text}</p>
+              ) : (
+                <p class="mt-3 text-stone-600">
+                  {block.lead && <strong class="font-semibold text-stone-900">{block.lead} </strong>}
+                  {block.text}
+                </p>
+              )
+            )}
+            {item.source && (
+              <p class="mt-3 text-sm text-stone-500">
+                {item.source.prefix}{' '}
+                <a
+                  href={item.source.href}
+                  rel="noopener"
+                  class="font-medium text-gold-dark underline"
+                >
+                  {item.source.label}
+                </a>
+              </p>
+            )}
           </div>
         ))
       }
@@ -121,15 +254,17 @@ const faqSchema = {
 
   <section class="bg-gold/10 py-16">
     <div class="mx-auto max-w-3xl px-6">
-      <h2 class="font-heading text-2xl text-brand">Not sure where to start? Talk it through first</h2>
+      <h2 class="font-heading text-2xl text-brand">
+        {`Free First-Time Buyer Consultation With ${agent}`}
+      </h2>
       <p class="mt-4 text-stone-600">
-        Book a free buyer consultation. Thomas spends 20 to 30 minutes with you on a Google Meet
-        video call covering the buying process, your budget, pre-approval, and what to do first.
-        There's no obligation.
+        {agent}, a licensed Idaho real estate agent with {brokerage}, offers first-time buyers a
+        free 20 to 30 minute video call on Google Meet. The call covers the buying process, your
+        budget, pre-approval, and what to do first. There is no obligation.
       </p>
       <p class="mt-3 text-sm text-stone-500">
-        Thomas is not an attorney or a lender. For legal questions, ask a real estate attorney; for
-        loan options, talk with a mortgage lender.
+        {agent} is not an attorney or a mortgage lender. For legal questions, ask a real estate
+        attorney; for loan options, talk with a mortgage lender.
       </p>
       <a href="/get-started" class="mt-4 inline-block font-medium text-gold-dark">
         Book your free first-time buyer consultation &rarr;
@@ -139,10 +274,20 @@ const faqSchema = {
 
   <section class="bg-brand py-16 text-white">
     <div class="mx-auto max-w-3xl px-6 text-center">
-      <h2 class="font-heading text-2xl">See how I can help</h2>
+      <h2 class="font-heading text-2xl">
+        {`How ${agent} Helps First-Time Buyers From Pre-Approval to Closing`}
+      </h2>
+      <p class="mt-3 text-stone-200">
+        {agent} helps first-time buyers with home search and tours, offers and negotiation, and the
+        contract-to-closing process.
+      </p>
       <div class="mt-6 flex flex-wrap justify-center gap-4">
-        <a href="/what-i-offer" class="text-sm font-medium text-gold">How I Help &rarr;</a>
-        <a href="/get-started" class="text-sm font-medium text-gold">Get Started &rarr;</a>
+        <a href="/what-i-offer" class="text-sm font-medium text-gold">
+          See how Thomas helps first-time buyers &rarr;
+        </a>
+        <a href="/get-started" class="text-sm font-medium text-gold">
+          Book a free buyer consultation &rarr;
+        </a>
       </div>
     </div>
   </section>
