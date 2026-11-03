@@ -1,60 +1,82 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
+import SourceLinks from '../components/SourceLinks.astro'
 import { SITE } from '../lib/site.js'
+import { SRC, uniqueSources } from '../lib/sources.js'
 
 const agent = SITE.agentName
 const area = SITE.areaSentence
 
-// Figures below come from the official program pages linked in the Sources section.
-// Programs change, so the page tells readers to confirm details with a lender.
+// Every figure below comes from the pages listed in each row's sources. Programs change, so the
+// page tells readers to confirm details with a lender.
 const loanRows = [
   {
     loan: 'Conventional',
-    down: 'As low as 3% for eligible buyers; 20% avoids mortgage insurance',
-    who: 'Buyers with steady income and decent credit. Lenders often look for a credit score of around 620 or higher.',
-    watch: 'Private mortgage insurance is generally required with less than 20% down.',
+    down: 'As low as 3% for eligible buyers. Putting 20% down generally avoids mortgage insurance.',
+    who: 'Fannie Mae HomeReady and Freddie Mac Home Possible allow 3% down for households at or under 80% of the area median income. Fannie Mae also allows 3% down on a standard loan if at least one borrower is a first-time buyer. HomeReady requires a credit score of 620.',
+    watch:
+      'Mortgage insurance is typically required with under 20% down, but on HomeReady and Home Possible it can be cancelled once your equity reaches 20%. Homeownership education may be required if every borrower is a first-time buyer.',
+    sources: [SRC.fannieHomeReady, SRC.fannie97, SRC.freddieHomePossible, SRC.cfpbMortgageInsurance],
   },
   {
     loan: 'FHA',
-    down: 'As low as 3.5%',
-    who: 'Insured by the Federal Housing Administration. HUD says it may suit people buying their first home.',
-    watch: 'FHA loans carry mortgage insurance. A lender can quote the exact cost for your situation.',
+    down: 'As low as 3.5% of the purchase price.',
+    who: 'HUD says FHA loans offer lower down payments and are a good option for first-time buyers.',
+    watch:
+      'FHA mortgage insurance is required on all FHA loans, with an upfront cost that can be rolled into the loan and a monthly cost.',
+    sources: [SRC.hudFha, SRC.hudBuying, SRC.cfpbMortgageInsurance],
   },
   {
     loan: 'VA',
-    down: 'No down payment as long as the price is not higher than the appraised value',
-    who: 'Eligible veterans and service members who qualify for a VA Certificate of Eligibility.',
-    watch: 'You may owe a one-time VA funding fee. You must plan to live in the home.',
+    down: 'No down payment as long as the sales price is not higher than the home’s appraised value.',
+    who: 'Eligible veterans and service members who qualify for a VA Certificate of Eligibility and meet VA and lender standards for credit and income.',
+    watch: 'You may owe a one-time VA funding fee, and you must plan to live in the home.',
+    sources: [SRC.vaPurchase],
   },
   {
     loan: 'USDA',
-    down: 'None required',
-    who: 'Buyers whose household income is within 115% of the area median income, buying a home in an eligible rural area.',
-    watch: 'Currently a 1% upfront guarantee fee and a 0.35% annual fee. Check whether a specific address is eligible before you fall in love with it.',
+    down: 'None required. Loans can cover 100% of the appraised value.',
+    who: 'Households with income within 115% of the area median income, buying a modest primary residence in an eligible rural area.',
+    watch:
+      'As of USDA’s January 2026 overview: a 1% upfront guarantee fee and a 0.35% annual fee. Check whether a specific address is eligible before you fall in love with it.',
+    sources: [SRC.usdaGuaranteed, SRC.usdaEligibility],
   },
+]
+
+const idahoHousingBullets = [
+  'Household income must be at or below $170,000, and some loan programs require lower income.',
+  'You do not have to be a first-time buyer.',
+  'You must sign up for the Finally Home! homebuyer education course.',
+  'You must work with a lender that Idaho Housing has approved.',
+  'The assistance is a second mortgage, so it adds a small monthly payment.',
 ]
 
 const faqs = [
   {
     q: 'What loans can a first-time buyer use in Idaho?',
-    a: `First-time buyers in Idaho commonly use conventional, FHA, VA, or USDA loans. Idaho Housing and Finance Association also offers its own loan programs through approved lenders, and each of those loan types can differ in down payment, credit expectations, and mortgage insurance. ${agent} can explain how they compare, and a mortgage lender can tell you which one fits your numbers.`,
+    a: `First-time buyers in Idaho commonly use conventional, FHA, VA, or USDA loans. Idaho Housing and Finance Association also offers loan programs for each of those types through approved lenders. Down payment, credit expectations, and mortgage insurance differ between them. ${agent} can explain how they compare, and a mortgage lender can tell you which one fits your numbers.`,
+    sources: [SRC.idahoHousingHomebuyers, SRC.hudFha, SRC.vaPurchase, SRC.usdaGuaranteed, SRC.fannieHomeReady],
   },
   {
     q: 'How much do I need for a down payment in Idaho?',
     a: 'It depends on the loan. Conventional loans can start at 3% down for eligible buyers, FHA loans start at 3.5%, and VA and USDA loans can require nothing down for eligible buyers. Idaho Housing also offers down payment assistance of up to 8% of the sales price, and buyers contribute a minimum of $500 of their own funds. You should still budget for closing costs and a home inspection.',
+    sources: [SRC.fannieHomeReady, SRC.hudFha, SRC.vaPurchase, SRC.usdaGuaranteed, SRC.idahoHousingDpa],
   },
   {
     q: 'Does Idaho have down payment assistance for first-time buyers?',
     a: 'Yes. Idaho Housing and Finance Association offers down payment assistance of up to 8% of the home’s sales price toward the down payment and closing costs. Household income must be at or below $170,000, and some loan programs require lower income. Buyers must sign up for the Finally Home! homebuyer education course and work with an Idaho Housing approved lender. The assistance is a second mortgage, so it adds a small monthly payment.',
+    sources: [SRC.idahoHousingDpa],
   },
   {
     q: 'Do I have to be a first-time buyer to use Idaho Housing down payment assistance?',
     a: 'No. Idaho Housing says its down payment assistance is open to eligible Idaho homebuyers, not only first-time buyers.',
+    sources: [SRC.idahoHousingDpa],
   },
   {
     q: 'Is a USDA loan available in Idaho Falls, Rexburg, Rigby, Ammon, Shelley, or Blackfoot?',
-    a: 'It depends on the specific property address. USDA loans require the home to be in an eligible rural area, and eligibility is checked address by address on the USDA property eligibility website. Household income must also be within the USDA limit for the area.',
+    a: 'It depends on the specific property address. USDA loans require the home to be in an eligible rural area, and you can check an address on the USDA eligibility website. Household income must also be within the USDA limit for the area.',
+    sources: [SRC.usdaEligibility, SRC.usdaGuaranteed],
   },
 ]
 
@@ -68,27 +90,17 @@ const faqSchema = {
   })),
 }
 
-const sources = [
-  {
-    label: 'Idaho Housing and Finance Association: Down Payment Assistance',
-    href: 'https://www.idahohousing.com/homebuyers/down-payment-closing-cost-assistance/',
-  },
-  { label: 'Idaho Housing and Finance Association: Homebuyers', href: 'https://www.idahohousing.com/homebuyers/' },
-  { label: 'HUD: FHA loans', href: 'https://www.hud.gov/helping-americans/loans' },
-  {
-    label: 'VA: Purchase loan',
-    href: 'https://www.va.gov/housing-assistance/home-loans/loan-types/purchase-loan/',
-  },
-  {
-    label: 'USDA Rural Development: Single Family Housing Guaranteed Loan Program',
-    href: 'https://www.rd.usda.gov/media/file/download/usda-rd-sfh-guarantee-loan-program-101-jan-2026.pdf',
-  },
-]
+// The full list at the bottom is built from every source cited above, so nothing cited inline can be missing.
+const allSources = uniqueSources(
+  loanRows.flatMap((r) => r.sources),
+  [SRC.idahoHousingDpa, SRC.idahoHousingHomebuyers],
+  faqs.flatMap((f) => f.sources)
+)
 ---
 
 <Layout
   title="First-Time Buyer Loans and Down Payment Help in Idaho"
-  description={`Compare conventional, FHA, VA, and USDA loans and Idaho Housing down payment assistance for first-time buyers in ${area}.`}
+  description={`Compare conventional, FHA, VA, and USDA loans and Idaho Housing down payment assistance for first-time buyers in ${area}, with links to the official sources.`}
 >
   <Fragment slot="head">
     <JsonLd data={faqSchema} />
@@ -105,30 +117,31 @@ const sources = [
     <p class="text-lg text-stone-700">
       Most first-time buyers in Idaho choose between four loan types: conventional, FHA, VA, and
       USDA. Idaho Housing and Finance Association adds down payment assistance on top. Here is how
-      they compare, in plain language.
+      they compare, in plain language, with a link to the official source for each claim.
     </p>
     <p class="mt-4 text-stone-600">
       {agent} is a licensed Idaho real estate agent with {SITE.brokerage}, helping first-time buyers
       in {area}. He is not a lender, so confirm every detail below with a mortgage lender before you
-      decide.
+      decide. The sources were checked in November 2026, and programs change.
     </p>
   </section>
 
   <section class="bg-stone-50 py-16">
-    <div class="mx-auto max-w-4xl px-6">
+    <div class="mx-auto max-w-5xl px-6">
       <h2 class="font-heading text-2xl text-brand">Loan Types Compared</h2>
       <div class="mt-6 overflow-x-auto">
         <table class="w-full border-collapse text-left text-sm">
-          <caption class="sr-only">First-time buyer loan types compared by down payment, who it fits, and what to watch for</caption>
+          <caption class="sr-only">First-time buyer loan types compared by down payment, who it fits, what to watch for, and sources</caption>
           <thead class="bg-stone-100 text-stone-900">
             <tr>
               <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">Loan</th>
               <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">Down payment</th>
               <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">Who it fits</th>
               <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">What to watch for</th>
+              <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">Sources</th>
             </tr>
           </thead>
-          <tbody class="bg-white text-stone-600">
+          <tbody class="bg-white align-top text-stone-600">
             {
               loanRows.map((row) => (
                 <tr>
@@ -138,6 +151,9 @@ const sources = [
                   <td class="border border-stone-200 px-3 py-2">{row.down}</td>
                   <td class="border border-stone-200 px-3 py-2">{row.who}</td>
                   <td class="border border-stone-200 px-3 py-2">{row.watch}</td>
+                  <td class="border border-stone-200 px-3 py-2">
+                    <SourceLinks sources={row.sources} stacked />
+                  </td>
                 </tr>
               ))
             }
@@ -154,17 +170,19 @@ const sources = [
   <section class="mx-auto max-w-3xl px-6 py-16">
     <h2 class="font-heading text-2xl text-brand">Idaho Housing Down Payment Assistance</h2>
     <p class="mt-4 text-stone-600">
-      Idaho Housing and Finance Association is Idaho’s state housing finance agency. Its down
-      payment assistance can cover up to 8% of the home’s sales price toward the down payment and
-      closing costs, and buyers contribute a minimum of $500 of their own funds.
+      Idaho Housing and Finance Association offers down payment assistance that can cover up to 8%
+      of the home’s sales price toward the down payment and closing costs. Buyers contribute a
+      minimum of $500 of their own funds.
     </p>
     <ul class="mt-4 list-disc space-y-2 pl-6 text-stone-600">
-      <li>Household income must be at or below $170,000, and some loan programs require lower income.</li>
-      <li>You do not have to be a first-time buyer.</li>
-      <li>You must sign up for the Finally Home! homebuyer education course.</li>
-      <li>You must work with a lender that Idaho Housing has approved.</li>
-      <li>The assistance is a second mortgage, so it adds a small monthly payment.</li>
+      {idahoHousingBullets.map((b) => <li>{b}</li>)}
     </ul>
+    <SourceLinks sources={SRC.idahoHousingDpa} />
+    <p class="mt-4 text-stone-600">
+      Idaho Housing also offers its own loans, and says a credit score of 620 or greater is
+      beneficial. Those loans and the assistance both go through lenders Idaho Housing has approved.
+    </p>
+    <SourceLinks sources={SRC.idahoHousingHomebuyers} />
     <p class="mt-4 text-sm text-stone-500">
       These details were taken from Idaho Housing’s website in November 2026. Limits and rates
       change, so check their site or ask an approved lender for current numbers.
@@ -198,6 +216,7 @@ const sources = [
           <div>
             <h3 class="font-semibold text-stone-900">{item.q}</h3>
             <p class="mt-2 text-stone-600">{item.a}</p>
+            <SourceLinks sources={item.sources} />
           </div>
         ))
       }
@@ -223,12 +242,12 @@ const sources = [
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-12">
-    <h2 class="text-sm font-semibold uppercase tracking-wide text-stone-500">Sources</h2>
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-stone-500">All sources on this page</h2>
     <ul class="mt-3 space-y-1 text-sm">
       {
-        sources.map((s) => (
+        allSources.map((s) => (
           <li>
-            <a href={s.href} rel="noopener" class="text-gold-dark underline">
+            <a href={s.href} target="_blank" rel="noopener noreferrer" class="text-gold-dark underline">
               {s.label}
             </a>
           </li>

@@ -1,0 +1,33 @@
+---
+// Shows the outside pages that back up a claim, as links that open in a new tab so visitors keep
+// their place on the site. Pass one source or an array. Set stacked to list one per line (tables).
+const { sources, stacked = false } = Astro.props
+const list = Array.isArray(sources) ? sources : [sources]
+const heading = list.length > 1 ? 'Sources' : 'Source'
+---
+
+{
+  stacked ? (
+    <ul class="space-y-1 text-xs">
+      {list.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener noreferrer" class="text-gold-dark underline">
+            {s.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="mt-2 text-xs text-stone-500">
+      <span class="font-semibold">{heading}:</span>
+      {list.map((s, i) => (
+        <Fragment>
+          {i > 0 ? '; ' : ' '}
+          <a href={s.href} target="_blank" rel="noopener noreferrer" class="text-gold-dark underline">
+            {s.label}
+          </a>
+        </Fragment>
+      ))}
+    </p>
+  )
+}

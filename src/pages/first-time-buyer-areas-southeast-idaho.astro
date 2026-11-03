@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
+import SourceLinks from '../components/SourceLinks.astro'
 import { SITE } from '../lib/site.js'
+import { SRC } from '../lib/sources.js'
 
 const agent = SITE.agentName
 const area = SITE.areaSentence
@@ -147,6 +149,10 @@ const faqSchema = {
           </tbody>
         </table>
       </div>
+      <p class="mt-4 text-sm text-stone-500">
+        These descriptions reflect local knowledge, not statistics. For property taxes and school
+        boundaries, check the county and the school district for the specific address.
+      </p>
     </div>
   </section>
 
@@ -160,6 +166,7 @@ const faqSchema = {
       rural areas, checked address by address. See how the loan types compare in the
       <a href="/first-time-buyer-loans-idaho" class="font-medium text-gold-dark underline">first-time buyer loans guide</a>.
     </p>
+    <SourceLinks sources={[SRC.usdaGuaranteed, SRC.usdaEligibility]} />
   </section>
 
   <section class="bg-stone-50 py-16">

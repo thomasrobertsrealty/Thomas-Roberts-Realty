@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
+import SourceLinks from '../components/SourceLinks.astro'
 import { SITE } from '../lib/site.js'
+import { SRC } from '../lib/sources.js'
 
 const faqs = [
   {
@@ -10,11 +12,13 @@ const faqs = [
   },
   {
     q: 'Do I need to be pre-approved before I look at homes?',
-    a: 'It is strongly recommended. A pre-approval from a mortgage lender tells you what you can afford and shows sellers you are a serious buyer. Thomas can explain the process, but he is not a lender, so the pre-approval itself comes from a lender.',
+    a: 'It is strongly recommended. A pre-approval is a statement from a mortgage lender that they are tentatively willing to lend you money, up to a certain amount, and sellers often want to see one before they accept an offer. It is based on assumptions and is not a guaranteed loan. Thomas can explain the process, but he is not a lender, so the pre-approval itself comes from a lender.',
+    sources: [SRC.cfpbPreapproval],
   },
   {
     q: 'How much do I need for a down payment?',
     a: 'It depends on the loan type. Conventional loans can start at 3% down for eligible buyers, FHA loans start at 3.5%, and VA and USDA loans can require no down payment for eligible buyers. Idaho Housing also offers down payment assistance of up to 8% of the sales price for eligible buyers. A lender can tell you what applies to you. Also plan for closing costs and the cost of a home inspection.',
+    sources: [SRC.fannieHomeReady, SRC.hudFha, SRC.vaPurchase, SRC.usdaGuaranteed, SRC.idahoHousingDpa],
   },
   {
     q: 'Which town is best for a first-time buyer near Idaho Falls?',
@@ -26,7 +30,8 @@ const faqs = [
   },
   {
     q: 'What does it cost to work with Thomas?',
-    a: 'The initial consultation is free with no obligation. A buyer’s agent and the buyer put the agent’s compensation in a written agreement before touring homes together, so you know the terms before you commit. Thomas will explain how his compensation works when you talk.',
+    a: 'The initial consultation is free with no obligation. Under rules that took effect August 17, 2024, an agent working with a buyer must have a written agreement before touring a home, and it has to state the agent’s compensation as a specific amount or rate. Broker fees and commissions are not set by law and are negotiable. Thomas will explain how his compensation works when you talk, before you agree to anything.',
+    sources: [SRC.narSettlement],
   },
   {
     q: 'Is there a free first-time buyer consultation?',
@@ -85,6 +90,7 @@ const faqSchema = {
           <div>
             <h2 class="font-semibold text-stone-900">{item.q}</h2>
             <p class="mt-2 text-stone-600">{item.a}</p>
+            {item.sources && <SourceLinks sources={item.sources} />}
           </div>
         ))
       }

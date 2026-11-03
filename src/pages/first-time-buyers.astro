@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
+import SourceLinks from '../components/SourceLinks.astro'
 import { SITE } from '../lib/site.js'
+import { SRC } from '../lib/sources.js'
 
 const agent = SITE.agentName
 const brokerage = SITE.brokerage
@@ -40,12 +42,12 @@ const downPaymentRows = [
   {
     loan: 'Conventional',
     down: 'As low as 3% for eligible buyers (20% avoids mortgage insurance)',
-    note: 'Mortgage insurance is generally required with less than 20% down',
+    note: 'Mortgage insurance is typically required with less than 20% down',
   },
   {
     loan: 'FHA',
     down: '3.5%',
-    note: 'Often used by buyers with lower credit scores',
+    note: 'HUD says FHA loans are a good option for first-time buyers',
   },
   {
     loan: 'VA',
@@ -76,11 +78,13 @@ const faqs = [
       { text: 'The down payment depends on the type of loan you choose.' },
       {
         lead: 'Conventional loans:',
-        text: `A conventional loan is a mortgage that isn’t backed by the government. The traditional down payment is 20%, which also lets you avoid private mortgage insurance (PMI), an extra monthly cost that protects the lender. Eligible buyers can put down as little as 3% through programs backed by Fannie Mae and Freddie Mac, such as Conventional 97, HomeReady, HomeOne, and Home Possible. With less than 20% down, PMI is generally required. Eligibility varies by program. Lenders often look for a credit score of around 620 or higher, some programs have income limits, and some require first-time buyer status or a homeownership education course. The home usually needs to be a one-unit primary residence.`,
+        text: `A conventional loan is a mortgage that isn’t backed by the government. The traditional down payment is 20%, which also lets you avoid private mortgage insurance (PMI), an extra monthly cost that protects the lender. Eligible buyers can put down as little as 3% through Fannie Mae’s HomeReady and standard 97% loans and Freddie Mac’s Home Possible. With less than 20% down, mortgage insurance is typically required. Eligibility varies by program. HomeReady requires a credit score of 620, HomeReady and Home Possible limit household income to 80% of the area median, Fannie Mae’s standard 3% down loan needs at least one first-time buyer, and homeownership education can be required when every borrower is a first-time buyer. The home must be a one-unit primary residence.`,
+        sources: [SRC.fannieHomeReady, SRC.fannie97, SRC.freddieHomePossible, SRC.cfpbMortgageInsurance],
       },
       {
         lead: 'Other loan options:',
-        text: 'FHA loans require at least 3.5% down for many qualified borrowers. VA loans (for eligible veterans and service members) and USDA loans (for eligible homes in qualifying rural areas) can require 0% down.',
+        text: 'FHA loans can start at 3.5% down, and FHA mortgage insurance is required on every FHA loan. VA loans (for eligible veterans and service members) and USDA loans (for eligible homes in qualifying rural areas) can require 0% down.',
+        sources: [SRC.hudFha, SRC.cfpbMortgageInsurance, SRC.vaPurchase, SRC.usdaGuaranteed],
       },
       { table: true },
       {
@@ -95,20 +99,17 @@ const faqs = [
         text: `${agent} is not a lender. Loan requirements vary by lender, so confirm the details with a mortgage lender.`,
       },
     ],
-    source: {
-      href: 'https://www.hud.gov/helping-americans/buying-a-home',
-      label: 'HUD: Buying a Home',
-      prefix: 'Learn more about FHA loans and buying a home:',
-    },
   },
   {
     q: 'What are closing costs and the home inspection when buying a home in Idaho?',
     blocks: [
       {
-        text: 'Closing costs are the fees you pay to finish the purchase, separate from your down payment. They typically include lender fees, the appraisal, title and escrow services, and prepaid items such as property taxes and homeowners insurance. The home inspection is a separate cost you pay during the inspection period after your offer is accepted.',
+        text: 'Closing costs are the fees you pay to finish the purchase, separate from your down payment. The Consumer Financial Protection Bureau groups them into lender charges, optional points that lower your rate, required third-party services such as the appraisal and title insurance, local government fees, and prepaid items and deposits such as interest, the first year of homeowners insurance, and starting escrow deposits for property taxes and insurance.',
+        sources: [SRC.cfpbClosingCosts],
       },
       {
-        text: `Your lender gives you a Loan Estimate that itemizes the expected closing costs, so you can see real numbers for your loan instead of a rule of thumb. Ask for one early, and bring it to your consultation with ${agent}. Some loan programs and sellers can help cover part of these costs, which is worth asking about when you compare loans.`,
+        text: `The home inspection and real estate agent fees are not required by the mortgage, so the CFPB lists them as other homebuying expenses. Your lender must give you a Loan Estimate within three business days of receiving your application, which shows estimated closing costs, the monthly payment, and the interest rate on a standard form, so you can compare lenders side by side. Bring yours to your consultation with ${agent}. Idaho Housing’s down payment assistance can go toward closing costs for eligible buyers.`,
+        sources: [SRC.cfpbClosingCosts, SRC.cfpbLoanEstimate, SRC.idahoHousingDpa],
       },
       {
         note: true,
@@ -123,7 +124,8 @@ const faqs = [
         text: `You are not required to use a real estate agent to buy a home, but an agent helps with searching for homes, pricing, negotiation, and keeping contract deadlines on track. ${agent}, a licensed agent with ${brokerage}, explains every step so first-time buyers know what they are signing.`,
       },
       {
-        text: `A buyer’s agent and the buyer put the agent’s compensation in a written agreement before touring homes together, so you know the terms before you commit. The first consultation is free, and ${agent} explains how his compensation works on that call, before you agree to anything.`,
+        text: `Under rules that took effect August 17, 2024, an agent working with a buyer must have a written agreement with them before touring a home. That agreement has to state the agent’s compensation as a specific amount or rate, and it must say that broker fees and commissions are not set by law and are fully negotiable. The first consultation with ${agent} is free, and he explains how his compensation works on that call, before you agree to anything.`,
+        sources: [SRC.narSettlement],
       },
     ],
   },
@@ -246,23 +248,14 @@ const faqSchema = {
               ) : block.note ? (
                 <p class="mt-3 text-sm text-stone-500">{block.text}</p>
               ) : (
-                <p class="mt-3 text-stone-600">
-                  {block.lead && <strong class="font-semibold text-stone-900">{block.lead} </strong>}
-                  {block.text}
-                </p>
+                <Fragment>
+                  <p class="mt-3 text-stone-600">
+                    {block.lead && <strong class="font-semibold text-stone-900">{block.lead} </strong>}
+                    {block.text}
+                  </p>
+                  {block.sources && <SourceLinks sources={block.sources} />}
+                </Fragment>
               )
-            )}
-            {item.source && (
-              <p class="mt-3 text-sm text-stone-500">
-                {item.source.prefix}{' '}
-                <a
-                  href={item.source.href}
-                  rel="noopener"
-                  class="font-medium text-gold-dark underline"
-                >
-                  {item.source.label}
-                </a>
-              </p>
             )}
           </div>
         ))
