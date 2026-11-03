@@ -5,6 +5,7 @@ import {
   CHECKLIST,
   DEFAULT_PLAN,
   calculateCosts,
+  explainCosts,
   money,
   progressSummary,
 } from '../lib/buyerTools.js'
@@ -431,9 +432,60 @@ function Field({ label, name, value, onChange, hint, suffix }) {
   )
 }
 
+// The step-by-step breakdown shown when a result is clicked.
+function Explanation({ id, data }) {
+  return (
+    <div id={id} className="mb-3 rounded-md bg-stone-50 p-4 text-sm text-stone-700">
+      <p>{data.what}</p>
+      <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-stone-500">Formula</p>
+      <p className="mt-1 text-stone-900">{data.formula}</p>
+      <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-stone-500">With your numbers</p>
+      <ul className="mt-1 space-y-1 text-stone-900">
+        {data.lines.map((line, i) => (
+          <li key={i}>{line}</li>
+        ))}
+      </ul>
+      {data.note && <p className="mt-3 text-xs text-stone-500">{data.note}</p>}
+    </div>
+  )
+}
+
+function ResultRow({ id, label, value, open, onToggle, data }) {
+  const panelId = 'explain-' + id
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={panelId}
+        className="flex w-full items-center justify-between gap-4 rounded px-1 py-2 text-left hover:bg-stone-50 focus:outline-none focus:ring-2 focus:ring-gold/40"
+      >
+        <span className="text-stone-600">
+          {label}
+          <span className="ml-2 text-xs font-medium text-gold-dark underline">{open ? 'Hide' : 'See how'}</span>
+        </span>
+        <span className="font-semibold text-stone-900">{money(value)}</span>
+      </button>
+      {open && <Explanation id={panelId} data={data} />}
+    </div>
+  )
+}
+
 function Calculator({ user, plan, setPlan, planId, setPlanId }) {
   const [saveStatus, setSaveStatus] = useState('idle')
+  const [openKeys, setOpenKeys] = useState(() => new Set())
   const costs = calculateCosts(plan)
+  const why = explainCosts(costs)
+
+  function toggleOpen(key) {
+    setOpenKeys((prev) => {
+      const next = new Set(prev)
+      if (next.has(key)) next.delete(key)
+      else next.add(key)
+      return next
+    })
+  }
 
   function update(event) {
     const { name, value } = event.target
@@ -467,12 +519,19 @@ function Calculator({ user, plan, setPlan, planId, setPlanId }) {
   }
 
   const rows = [
-    ['Principal and interest', costs.principalAndInterest],
-    ['Property tax', costs.propertyTax],
-    ['Homeowners insurance', costs.insurance],
+    ['principalAndInterest', 'Principal and interest'],
+    ['propertyTax', 'Property tax'],
+    ['insurance', 'Homeowners insurance'],
   ]
-  if (costs.mortgageInsurance > 0) rows.push(['Mortgage insurance (estimate)', costs.mortgageInsurance])
-  if (costs.hoa > 0) rows.push(['HOA dues', costs.hoa])
+  if (costs.mortgageInsurance > 0) rows.push(['mortgageInsurance', 'Mortgage insurance (estimate)'])
+  if (costs.hoa > 0) rows.push(['hoa', 'HOA dues'])
+
+  const totalRows = [
+    ['loan', 'Loan amount', costs.loan],
+    ['totalInterest', 'Total interest over the loan', costs.totalInterest],
+    ['closingCosts', 'Closing costs (rough 3% estimate)', costs.closingCosts],
+    ['cashNeeded', 'Cash needed at closing (down payment + closing costs)', costs.cashNeeded],
+  ]
 
   return (
     <div className="grid gap-8 md:grid-cols-2">
@@ -493,38 +552,54 @@ function Calculator({ user, plan, setPlan, planId, setPlanId }) {
 
       <div>
         <h3 className="font-heading text-xl text-brand">What it could cost</h3>
-        <div className="mt-4 rounded-lg bg-brand p-6 text-white">
-          <p className="text-sm uppercase tracking-wide text-gold">Estimated monthly payment</p>
-          <p className="mt-1 font-heading text-4xl">{money(costs.monthlyTotal)}</p>
+        <p className="mt-2 text-sm text-stone-600">Click any result to see how it was calculated.</p>
+
+        <button
+          type="button"
+          onClick={() => toggleOpen('monthlyTotal')}
+          aria-expanded={openKeys.has('monthlyTotal')}
+          aria-controls="explain-monthlyTotal"
+          className="mt-3 block w-full rounded-lg bg-brand p-6 text-left text-white transition-colors hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-gold/60"
+        >
+          <span className="block text-sm uppercase tracking-wide text-gold">Estimated monthly payment</span>
+          <span className="mt-1 block font-heading text-4xl">{money(costs.monthlyTotal)}</span>
+          <span className="mt-2 block text-xs text-stone-200 underline">
+            {openKeys.has('monthlyTotal') ? 'Hide calculation' : 'See how this is calculated'}
+          </span>
+        </button>
+        {openKeys.has('monthlyTotal') && (
+          <div className="mt-2">
+            <Explanation id="explain-monthlyTotal" data={why.monthlyTotal} />
+          </div>
+        )}
+
+        <div className="mt-4 divide-y divide-stone-200 text-sm">
+          {rows.map(([key, label]) => (
+            <ResultRow
+              key={key}
+              id={key}
+              label={label}
+              value={costs[key]}
+              open={openKeys.has(key)}
+              onToggle={() => toggleOpen(key)}
+              data={why[key]}
+            />
+          ))}
         </div>
 
-        <dl className="mt-4 divide-y divide-stone-200 text-sm">
-          {rows.map(([label, value]) => (
-            <div key={label} className="flex justify-between py-2">
-              <dt className="text-stone-600">{label}</dt>
-              <dd className="font-semibold text-stone-900">{money(value)}</dd>
-            </div>
+        <div className="mt-6 divide-y divide-stone-200 rounded-lg border border-stone-200 px-3 py-1 text-sm">
+          {totalRows.map(([key, label, value]) => (
+            <ResultRow
+              key={key}
+              id={key}
+              label={label}
+              value={value}
+              open={openKeys.has(key)}
+              onToggle={() => toggleOpen(key)}
+              data={why[key]}
+            />
           ))}
-        </dl>
-
-        <dl className="mt-6 space-y-2 rounded-lg border border-stone-200 p-4 text-sm">
-          <div className="flex justify-between">
-            <dt className="text-stone-600">Loan amount</dt>
-            <dd className="font-semibold">{money(costs.loan)}</dd>
-          </div>
-          <div className="flex justify-between">
-            <dt className="text-stone-600">Total interest over the loan</dt>
-            <dd className="font-semibold">{money(costs.totalInterest)}</dd>
-          </div>
-          <div className="flex justify-between">
-            <dt className="text-stone-600">Closing costs (rough 3% estimate)</dt>
-            <dd className="font-semibold">{money(costs.closingCosts)}</dd>
-          </div>
-          <div className="flex justify-between border-t border-stone-200 pt-2">
-            <dt className="text-stone-600">Cash needed at closing (down payment + closing costs)</dt>
-            <dd className="font-semibold">{money(costs.cashNeeded)}</dd>
-          </div>
-        </dl>
+        </div>
 
         <div className="mt-6 flex items-center gap-4">
           <button type="button" onClick={save} disabled={saveStatus === 'saving'} className={buttonClass}>
