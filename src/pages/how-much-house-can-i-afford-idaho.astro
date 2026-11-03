@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import JsonLd from '../components/JsonLd.astro'
+import SourceLinks from '../components/SourceLinks.astro'
 import { SITE } from '../lib/site.js'
+import { SRC, uniqueSources } from '../lib/sources.js'
 
 const agent = SITE.agentName
 const area = SITE.areaSentence
 
-// Definitions and the worked example below come from the CFPB pages linked in Sources.
+// Definitions and the worked example below come from the CFPB pages cited next to each section.
 // Debt-to-income limits differ by loan product and lender, so no single limit is quoted here.
 const lenderLooksAt = [
   { item: 'Income', detail: 'What you earn each month before taxes and other deductions.' },
@@ -38,22 +40,27 @@ const faqs = [
   {
     q: 'How much house can I get approved for in Idaho?',
     a: `A mortgage lender decides, based on your income, debts, assets, and credit record. The amount depends on the loan type and the lender, so the reliable way to find out is a preapproval letter. ${agent} can explain the process and help you plan, but he is not a lender.`,
+    sources: [SRC.cfpbPreapproval],
   },
   {
     q: 'What is a debt-to-income ratio?',
     a: 'Your debt-to-income ratio, or DTI, is all your monthly debt payments divided by your gross monthly income. Lenders use it as one way to judge whether you can manage the payments on a new loan. For example, $2,000 in monthly debts on $6,000 of gross monthly income is a 33% DTI.',
+    sources: [SRC.cfpbDti],
   },
   {
     q: 'What is the difference between prequalification and preapproval?',
     a: 'Both are letters stating how much a lender is generally willing to lend, based on certain assumptions, and neither is a guaranteed loan offer. Some lenders issue a prequalification from information you report yourself and a preapproval only from verified information, but lenders use the terms differently, so ask what the lender actually reviewed. A preapproval letter can expire, often within 30 to 60 days.',
+    sources: [SRC.cfpbPrequal, SRC.cfpbPreapproval],
   },
   {
     q: 'Should I borrow the most I am approved for?',
     a: 'Not necessarily. Being approved for an amount tells you what a lender is willing to lend, not what fits your budget. Compare the monthly payment with your real monthly spending, and plan for closing costs and home maintenance on top of it.',
+    sources: null,
   },
   {
     q: 'Can I shop around for a mortgage lender without hurting my chances?',
     a: 'Yes. A preapproval does not commit you to that lender. The Consumer Financial Protection Bureau suggests waiting to choose a lender until you have made an offer on a home and received a Loan Estimate from each lender you are considering, since preapproval letters do not give enough detail to compare deals.',
+    sources: [SRC.cfpbPreapproval, SRC.cfpbLoanEstimate],
   },
 ]
 
@@ -67,25 +74,15 @@ const faqSchema = {
   })),
 }
 
-const sources = [
-  {
-    label: 'CFPB: What is a debt-to-income ratio?',
-    href: 'https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/',
-  },
-  {
-    label: 'CFPB: Get a preapproval letter',
-    href: 'https://www.consumerfinance.gov/owning-a-home/explore/get-a-preapproval-letter/',
-  },
-  {
-    label: 'CFPB: What’s the difference between a prequalification letter and a preapproval letter?',
-    href: 'https://www.consumerfinance.gov/ask-cfpb/whats-the-difference-between-a-prequalification-letter-and-a-preapproval-letter-en-127/',
-  },
-]
+const allSources = uniqueSources(
+  [SRC.cfpbDti, SRC.cfpbPreapproval, SRC.cfpbPrequal, SRC.cfpbLoanEstimate],
+  faqs.flatMap((f) => f.sources || [])
+)
 ---
 
 <Layout
   title="How Much House Can I Afford in Idaho?"
-  description={`How lenders decide how much you can borrow: income, debt-to-income ratio, credit, and preapproval, explained for first-time buyers in ${area}.`}
+  description={`How lenders decide how much you can borrow: income, debt-to-income ratio, credit, and preapproval, explained for first-time buyers in ${area}, with links to the official sources.`}
 >
   <Fragment slot="head">
     <JsonLd data={faqSchema} />
@@ -104,6 +101,7 @@ const sources = [
       savings, and your credit record. You can estimate your own numbers first, then get a
       preapproval letter to find out what a lender will actually offer.
     </p>
+    <SourceLinks sources={SRC.cfpbPreapproval} />
     <p class="mt-4 text-stone-600">
       {agent} is a licensed Idaho real estate agent with {SITE.brokerage}, helping first-time buyers
       in {area}. He is not a lender, so treat everything here as a way to prepare for that
@@ -127,6 +125,7 @@ const sources = [
           ))
         }
       </dl>
+      <SourceLinks sources={SRC.cfpbPreapproval} />
     </div>
   </section>
 
@@ -138,6 +137,7 @@ const sources = [
       below is the one the Consumer Financial Protection Bureau uses, and it is an illustration, not
       a target or a limit.
     </p>
+    <SourceLinks sources={SRC.cfpbDti} />
     <ol class="mt-8 space-y-6">
       {
         estimateSteps.map((step, i) => (
@@ -155,7 +155,7 @@ const sources = [
     </ol>
     <p class="mt-8 text-stone-600">
       Want your own numbers? The free home buying calculator estimates a monthly payment for a
-      price, down payment, and rate you choose.
+      price, down payment, and rate you choose, and shows how every figure is calculated.
     </p>
     <a href="/my-plan" class="mt-3 inline-block font-medium text-gold-dark">
       Open the home buying calculator &rarr;
@@ -180,10 +180,12 @@ const sources = [
           after you make an offer and have Loan Estimates from each one to compare.
         </li>
       </ul>
+      <SourceLinks sources={[SRC.cfpbPreapproval, SRC.cfpbPrequal, SRC.cfpbLoanEstimate]} />
       <p class="mt-6 text-stone-600">
         If you are declined, ask why, check your credit report for errors, and consider a
         HUD-approved housing counseling agency for help improving your credit.
       </p>
+      <SourceLinks sources={SRC.cfpbPreapproval} />
     </div>
   </section>
 
@@ -211,6 +213,7 @@ const sources = [
             <div>
               <h3 class="font-semibold text-stone-900">{item.q}</h3>
               <p class="mt-2 text-stone-600">{item.a}</p>
+              {item.sources && <SourceLinks sources={item.sources} />}
             </div>
           ))
         }
@@ -237,12 +240,12 @@ const sources = [
   </section>
 
   <section class="mx-auto max-w-3xl px-6 py-12">
-    <h2 class="text-sm font-semibold uppercase tracking-wide text-stone-500">Sources</h2>
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-stone-500">All sources on this page</h2>
     <ul class="mt-3 space-y-1 text-sm">
       {
-        sources.map((s) => (
+        allSources.map((s) => (
           <li>
-            <a href={s.href} rel="noopener" class="text-gold-dark underline">
+            <a href={s.href} target="_blank" rel="noopener noreferrer" class="text-gold-dark underline">
               {s.label}
             </a>
           </li>
