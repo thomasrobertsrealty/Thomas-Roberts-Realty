@@ -1,0 +1,253 @@
+---
+import Layout from '../layouts/Layout.astro'
+import JsonLd from '../components/JsonLd.astro'
+import { SITE } from '../lib/site.js'
+
+const agent = SITE.agentName
+const area = SITE.areaSentence
+
+// Definitions and the worked example below come from the CFPB pages linked in Sources.
+// Debt-to-income limits differ by loan product and lender, so no single limit is quoted here.
+const lenderLooksAt = [
+  { item: 'Income', detail: 'What you earn each month before taxes and other deductions.' },
+  { item: 'Debts', detail: 'Monthly payments such as a car loan, student loans, and credit cards.' },
+  { item: 'Assets', detail: 'Savings and other money you have for the down payment and closing costs.' },
+  { item: 'Credit record', detail: 'How you have handled borrowing in the past.' },
+]
+
+const estimateSteps = [
+  {
+    title: 'Add up your gross monthly income',
+    body: 'Use your earnings before taxes and other deductions. In the example below, that is $6,000 a month.',
+  },
+  {
+    title: 'List your monthly debt payments',
+    body: 'Include the payment you expect for the new home, plus every other monthly debt such as a car loan or credit cards. In the example: a $1,500 mortgage, a $100 auto loan, and $400 in other debts, for $2,000 a month.',
+  },
+  {
+    title: 'Divide debts by income',
+    body: 'Monthly debts divided by gross monthly income is your debt-to-income ratio, or DTI. In the example, $2,000 divided by $6,000 is 33%.',
+  },
+  {
+    title: 'Ask a lender which limit applies to you',
+    body: 'Different loan products and lenders use different DTI limits. A lender can tell you the limit for the loan you want, and how much room your numbers leave.',
+  },
+]
+
+const faqs = [
+  {
+    q: 'How much house can I get approved for in Idaho?',
+    a: `A mortgage lender decides, based on your income, debts, assets, and credit record. The amount depends on the loan type and the lender, so the reliable way to find out is a preapproval letter. ${agent} can explain the process and help you plan, but he is not a lender.`,
+  },
+  {
+    q: 'What is a debt-to-income ratio?',
+    a: 'Your debt-to-income ratio, or DTI, is all your monthly debt payments divided by your gross monthly income. Lenders use it as one way to judge whether you can manage the payments on a new loan. For example, $2,000 in monthly debts on $6,000 of gross monthly income is a 33% DTI.',
+  },
+  {
+    q: 'What is the difference between prequalification and preapproval?',
+    a: 'Both are letters stating how much a lender is generally willing to lend, based on certain assumptions, and neither is a guaranteed loan offer. Some lenders issue a prequalification from information you report yourself and a preapproval only from verified information, but lenders use the terms differently, so ask what the lender actually reviewed. A preapproval letter can expire, often within 30 to 60 days.',
+  },
+  {
+    q: 'Should I borrow the most I am approved for?',
+    a: 'Not necessarily. Being approved for an amount tells you what a lender is willing to lend, not what fits your budget. Compare the monthly payment with your real monthly spending, and plan for closing costs and home maintenance on top of it.',
+  },
+  {
+    q: 'Can I shop around for a mortgage lender without hurting my chances?',
+    a: 'Yes. A preapproval does not commit you to that lender. The Consumer Financial Protection Bureau suggests waiting to choose a lender until you have made an offer on a home and received a Loan Estimate from each lender you are considering, since preapproval letters do not give enough detail to compare deals.',
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+
+const sources = [
+  {
+    label: 'CFPB: What is a debt-to-income ratio?',
+    href: 'https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-en-1791/',
+  },
+  {
+    label: 'CFPB: Get a preapproval letter',
+    href: 'https://www.consumerfinance.gov/owning-a-home/explore/get-a-preapproval-letter/',
+  },
+  {
+    label: 'CFPB: What’s the difference between a prequalification letter and a preapproval letter?',
+    href: 'https://www.consumerfinance.gov/ask-cfpb/whats-the-difference-between-a-prequalification-letter-and-a-preapproval-letter-en-127/',
+  },
+]
+---
+
+<Layout
+  title="How Much House Can I Afford in Idaho?"
+  description={`How lenders decide how much you can borrow: income, debt-to-income ratio, credit, and preapproval, explained for first-time buyers in ${area}.`}
+>
+  <Fragment slot="head">
+    <JsonLd data={faqSchema} />
+  </Fragment>
+
+  <section class="bg-brand py-12 text-center text-white">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">First-Time Buyers</p>
+    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">
+      How Much House Can I Afford in Idaho?
+    </h1>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <p class="text-lg text-stone-700">
+      A mortgage lender decides how much you can borrow, based on your income, your debts, your
+      savings, and your credit record. You can estimate your own numbers first, then get a
+      preapproval letter to find out what a lender will actually offer.
+    </p>
+    <p class="mt-4 text-stone-600">
+      {agent} is a licensed Idaho real estate agent with {SITE.brokerage}, helping first-time buyers
+      in {area}. He is not a lender, so treat everything here as a way to prepare for that
+      conversation, not as an approval.
+    </p>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">What a Lender Looks At</h2>
+      <p class="mt-4 text-stone-600">
+        To preapprove you, a lender reviews four things.
+      </p>
+      <dl class="mt-6 space-y-4">
+        {
+          lenderLooksAt.map((row) => (
+            <div>
+              <dt class="font-semibold text-stone-900">{row.item}</dt>
+              <dd class="text-stone-600">{row.detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="font-heading text-2xl text-brand">How to Estimate Your Debt-to-Income Ratio</h2>
+    <p class="mt-4 text-stone-600">
+      Lenders use your debt-to-income ratio (DTI) as one way to judge whether you can handle a new
+      loan. It is all your monthly debt payments divided by your gross monthly income. The example
+      below is the one the Consumer Financial Protection Bureau uses, and it is an illustration, not
+      a target or a limit.
+    </p>
+    <ol class="mt-8 space-y-6">
+      {
+        estimateSteps.map((step, i) => (
+          <li class="flex gap-4">
+            <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gold font-semibold text-brand-dark">
+              {i + 1}
+            </span>
+            <div>
+              <h3 class="font-semibold text-stone-900">{step.title}</h3>
+              <p class="mt-1 text-stone-600">{step.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-8 text-stone-600">
+      Want your own numbers? The free home buying calculator estimates a monthly payment for a
+      price, down payment, and rate you choose.
+    </p>
+    <a href="/my-plan" class="mt-3 inline-block font-medium text-gold-dark">
+      Open the home buying calculator &rarr;
+    </a>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">Preapproval: Finding Out What a Lender Will Offer</h2>
+      <p class="mt-4 text-stone-600">
+        A preapproval letter is a statement from a lender that they are tentatively willing to lend
+        you money, up to a certain amount. It is based on assumptions and is not a guaranteed loan.
+        Sellers often want to see one before they accept an offer.
+      </p>
+      <ul class="mt-6 list-disc space-y-3 pl-6 text-stone-600">
+        <li>Lenders usually check your credit before issuing the letter.</li>
+        <li>The documents a lender asks for vary, so ask early about anything that could take time to get.</li>
+        <li>A letter can expire, often within 30 to 60 days.</li>
+        <li>Ask what assumptions the lender made and what could lead to a higher rate or costs, or to a denial.</li>
+        <li>
+          Getting a letter does not commit you to that lender. The CFPB suggests choosing a lender
+          after you make an offer and have Loan Estimates from each one to compare.
+        </li>
+      </ul>
+      <p class="mt-6 text-stone-600">
+        If you are declined, ask why, check your credit report for errors, and consider a
+        HUD-approved housing counseling agency for help improving your credit.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="font-heading text-2xl text-brand">Approved Is Not the Same as Comfortable</h2>
+    <p class="mt-4 text-stone-600">
+      A lender tells you the most they are willing to lend. It does not know your other spending,
+      your savings goals, or how much room you want in your budget. Compare the monthly payment with
+      what you actually spend each month, and remember that closing costs and upkeep come on top of
+      the payment.
+    </p>
+    <p class="mt-4 text-stone-600">
+      The loan you choose also changes what you can afford, because down payment and mortgage
+      insurance differ by loan type.
+      <a href="/first-time-buyer-loans-idaho" class="font-medium text-gold-dark underline">Compare first-time buyer loans in Idaho</a>.
+    </p>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">Affordability Questions From First-Time Buyers</h2>
+      <div class="mt-8 space-y-8">
+        {
+          faqs.map((item) => (
+            <div>
+              <h3 class="font-semibold text-stone-900">{item.q}</h3>
+              <p class="mt-2 text-stone-600">{item.a}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gold/10 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">Talk Through Your Numbers With {agent}</h2>
+      <p class="mt-4 text-stone-600">
+        In a free 20 to 30 minute video call, {agent} can walk through your budget, what to bring to
+        a lender, and what to do first. There is no obligation.
+      </p>
+      <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+        <a href="/get-started" class="font-medium text-gold-dark">
+          Book your free first-time buyer consultation &rarr;
+        </a>
+        <a href="/first-time-buyers" class="font-medium text-gold-dark">
+          Read the first-time buyer guide &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-12">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-stone-500">Sources</h2>
+    <ul class="mt-3 space-y-1 text-sm">
+      {
+        sources.map((s) => (
+          <li>
+            <a href={s.href} rel="noopener" class="text-gold-dark underline">
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>

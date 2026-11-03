@@ -102,10 +102,28 @@ const faqs = [
     },
   },
   {
-    q: 'Do I need a real estate agent to buy a home?',
+    q: 'What are closing costs and the home inspection when buying a home in Idaho?',
+    blocks: [
+      {
+        text: 'Closing costs are the fees you pay to finish the purchase, separate from your down payment. They typically include lender fees, the appraisal, title and escrow services, and prepaid items such as property taxes and homeowners insurance. The home inspection is a separate cost you pay during the inspection period after your offer is accepted.',
+      },
+      {
+        text: `Your lender gives you a Loan Estimate that itemizes the expected closing costs, so you can see real numbers for your loan instead of a rule of thumb. Ask for one early, and bring it to your consultation with ${agent}. Some loan programs and sellers can help cover part of these costs, which is worth asking about when you compare loans.`,
+      },
+      {
+        note: true,
+        text: `${agent} is not a lender. Confirm closing cost details with a mortgage lender.`,
+      },
+    ],
+  },
+  {
+    q: 'Do I need a real estate agent to buy a home, and what does it cost me?',
     blocks: [
       {
         text: `You are not required to use a real estate agent to buy a home, but an agent helps with searching for homes, pricing, negotiation, and keeping contract deadlines on track. ${agent}, a licensed agent with ${brokerage}, explains every step so first-time buyers know what they are signing.`,
+      },
+      {
+        text: `A buyer’s agent and the buyer put the agent’s compensation in a written agreement before touring homes together, so you know the terms before you commit. The first consultation is free, and ${agent} explains how his compensation works on that call, before you agree to anything.`,
       },
     ],
   },
@@ -249,6 +267,46 @@ const faqSchema = {
           </div>
         ))
       }
+    </div>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">Go Deeper on Your First Home Purchase</h2>
+      <ul class="mt-6 space-y-4">
+        <li>
+          <a href="/how-much-house-can-i-afford-idaho" class="font-medium text-gold-dark underline">
+            How much house can I afford in Idaho?
+          </a>
+          <p class="mt-1 text-stone-600">
+            How lenders look at income, debt, and credit, and how preapproval works.
+          </p>
+        </li>
+        <li>
+          <a href="/first-time-buyer-loans-idaho" class="font-medium text-gold-dark underline">
+            First-time buyer loans and down payment help in Idaho
+          </a>
+          <p class="mt-1 text-stone-600">
+            Compare conventional, FHA, VA, and USDA loans, plus Idaho Housing down payment assistance.
+          </p>
+        </li>
+        <li>
+          <a href="/first-time-buyer-areas-southeast-idaho" class="font-medium text-gold-dark underline">
+            Where to buy your first home near Idaho Falls
+          </a>
+          <p class="mt-1 text-stone-600">
+            Compare Idaho Falls, Ammon, Rigby, Shelley, Blackfoot, and Rexburg.
+          </p>
+        </li>
+        <li>
+          <a href="/my-plan" class="font-medium text-gold-dark underline">
+            Home buying calculator and readiness checklist
+          </a>
+          <p class="mt-1 text-stone-600">
+            Estimate your monthly payment and see what to do before you buy.
+          </p>
+        </li>
+      </ul>
     </div>
   </section>
 

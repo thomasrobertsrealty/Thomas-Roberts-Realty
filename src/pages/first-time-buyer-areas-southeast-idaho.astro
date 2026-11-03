@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro'
+import JsonLd from '../components/JsonLd.astro'
+import { SITE } from '../lib/site.js'
+
+const agent = SITE.agentName
+const area = SITE.areaSentence
+
+// Locations and counties are stable facts. Prices, schools, and tax rates change, so this page
+// tells buyers what to check instead of quoting numbers that would go stale.
+const towns = [
+  {
+    name: 'Idaho Falls',
+    county: 'Bonneville County',
+    where: 'The largest city in the area, along the Snake River.',
+    appeals: 'Buyers who want city amenities, a wide mix of older and newer neighborhoods, and the shortest trips to jobs and shopping.',
+    check: 'Neighborhood by neighborhood, since age, lot size, and price vary a lot across the city.',
+  },
+  {
+    name: 'Ammon',
+    county: 'Bonneville County',
+    where: 'Directly east of Idaho Falls.',
+    appeals: 'Buyers who want a suburb close to Idaho Falls, often with newer homes and larger lots.',
+    check: 'New-construction pricing, school boundaries, and commute times at your usual hours.',
+  },
+  {
+    name: 'Rigby',
+    county: 'Jefferson County',
+    where: 'Northeast of Idaho Falls.',
+    appeals: 'Buyers who want a smaller community and more land for the money, and can handle a longer drive.',
+    check: 'Commute time, and whether the specific address is on city services or a well and septic.',
+  },
+  {
+    name: 'Shelley',
+    county: 'Bingham County',
+    where: 'A small town south of Idaho Falls.',
+    appeals: 'Buyers who want a slower pace and a small-town feel within driving distance of Idaho Falls.',
+    check: 'Commute, and what the limited number of homes for sale looks like at your price.',
+  },
+  {
+    name: 'Blackfoot',
+    county: 'Bingham County',
+    where: 'South of Idaho Falls along I-15.',
+    appeals: 'Buyers watching their budget, or looking for acreage, who can commute to Idaho Falls.',
+    check: 'The daily drive, and whether a USDA loan is available for the specific property.',
+  },
+  {
+    name: 'Rexburg',
+    county: 'Madison County',
+    where: 'North of Idaho Falls, home to BYU-Idaho.',
+    appeals: 'Buyers who want to be near the university, or who plan to rent part of the home to students.',
+    check: 'How the student rental market affects prices, and the rules on renting if you plan to.',
+  },
+]
+
+const factors = [
+  'Commute: drive the route at the hours you would really drive it before you decide.',
+  'Home age and lot size: newer homes and bigger lots usually mean a different price and a different drive.',
+  'Property taxes and insurance: these vary by county and by property, so ask your lender to include them in your monthly payment estimate.',
+  'City services: some properties outside city limits use a well and septic system instead.',
+  'Schools: if they matter to you, check the district’s own boundary maps for the address, since boundaries do not always match town lines.',
+  'Resale: think about who would buy the home from you in five to ten years.',
+]
+
+const faqs = [
+  {
+    q: 'Which town is best for a first-time buyer near Idaho Falls?',
+    a: `There is no single best town, because it depends on your budget, commute, and what you want from a home. Idaho Falls and Ammon offer the shortest trips to jobs and shopping, Rigby, Shelley, and Blackfoot can offer more land or a lower price for a longer drive, and Rexburg suits buyers tied to BYU-Idaho. ${agent} helps first-time buyers compare these towns for their own situation.`,
+  },
+  {
+    q: 'Is it cheaper to buy in Blackfoot or Shelley than in Idaho Falls?',
+    a: 'Often, buyers look to Blackfoot and Shelley for a lower price or more land than they would get in Idaho Falls, in exchange for a longer commute. Prices change month to month and vary by neighborhood, so ask for recent sales of similar homes in each town before you decide.',
+  },
+  {
+    q: 'Are Ammon and Idaho Falls different places?',
+    a: 'Yes. Ammon is its own city directly east of Idaho Falls, and both are in Bonneville County. That means a similar commute for many buyers but different city rules and services.',
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+}
+---
+
+<Layout
+  title="Where to Buy Your First Home Near Idaho Falls"
+  description={`Compare Idaho Falls, Ammon, Rigby, Shelley, Blackfoot, and Rexburg for first-time buyers: where each is, who it fits, and what to check before you buy.`}
+>
+  <Fragment slot="head">
+    <JsonLd data={faqSchema} />
+  </Fragment>
+
+  <section class="bg-brand py-12 text-center text-white">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gold">First-Time Buyers</p>
+    <h1 class="mt-3 font-heading text-3xl sm:text-4xl">
+      Where to Buy Your First Home Near Idaho Falls
+    </h1>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <p class="text-lg text-stone-700">
+      First-time buyers in Southeast Idaho usually weigh six towns: Idaho Falls, Ammon, Rigby,
+      Shelley, Blackfoot, and Rexburg. The right one depends on your budget, your commute, and the
+      kind of home you want.
+    </p>
+    <p class="mt-4 text-stone-600">
+      {agent} is a licensed Idaho real estate agent with {SITE.brokerage}, serving {area}. This page
+      does not quote prices, because they change too fast. Ask {agent} for recent sales in the towns
+      you are considering.
+    </p>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto max-w-4xl px-6">
+      <h2 class="font-heading text-2xl text-brand">The Six Towns Compared</h2>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full border-collapse text-left text-sm">
+          <caption class="sr-only">Southeast Idaho towns compared by location, who they fit, and what to check</caption>
+          <thead class="bg-stone-100 text-stone-900">
+            <tr>
+              <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">Town</th>
+              <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">Where it is</th>
+              <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">Often fits</th>
+              <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">Check before you buy</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white text-stone-600">
+            {
+              towns.map((t) => (
+                <tr>
+                  <th scope="row" class="border border-stone-200 px-3 py-2 font-medium text-stone-900">
+                    {t.name}
+                    <span class="block text-xs font-normal text-stone-500">{t.county}</span>
+                  </th>
+                  <td class="border border-stone-200 px-3 py-2">{t.where}</td>
+                  <td class="border border-stone-200 px-3 py-2">{t.appeals}</td>
+                  <td class="border border-stone-200 px-3 py-2">{t.check}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="font-heading text-2xl text-brand">What to Compare Between Towns</h2>
+    <ul class="mt-6 list-disc space-y-3 pl-6 text-stone-600">
+      {factors.map((f) => <li>{f}</li>)}
+    </ul>
+    <p class="mt-6 text-stone-600">
+      Your loan can also narrow the choice. For example, USDA loans only work for homes in eligible
+      rural areas, checked address by address. See how the loan types compare in the
+      <a href="/first-time-buyer-loans-idaho" class="font-medium text-gold-dark underline">first-time buyer loans guide</a>.
+    </p>
+  </section>
+
+  <section class="bg-stone-50 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">Choosing a Town: Common Questions</h2>
+      <div class="mt-8 space-y-8">
+        {
+          faqs.map((item) => (
+            <div>
+              <h3 class="font-semibold text-stone-900">{item.q}</h3>
+              <p class="mt-2 text-stone-600">{item.a}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gold/10 py-16">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="font-heading text-2xl text-brand">Compare Towns With {agent}</h2>
+      <p class="mt-4 text-stone-600">
+        In a free 20 to 30 minute video call, {agent} can walk through which towns fit your budget
+        and commute. There is no obligation.
+      </p>
+      <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+        <a href="/get-started" class="font-medium text-gold-dark">
+          Book your free first-time buyer consultation &rarr;
+        </a>
+        <a href="/first-time-buyers" class="font-medium text-gold-dark">
+          Read the first-time buyer guide &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
