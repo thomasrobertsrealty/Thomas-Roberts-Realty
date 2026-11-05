@@ -14,14 +14,20 @@ const steps = [
   {
     title: 'Get your finances in order',
     body: 'Before you buy a home, check your credit, decide on a monthly payment you are comfortable with, and plan for a down payment and closing costs. A mortgage lender can review your numbers and tell you what you qualify for.',
+    links: [
+      { href: '/how-much-house-can-i-afford-idaho', label: 'How much house can I afford in Idaho?' },
+      { href: '/my-plan', label: 'Home buying calculator (free account)' },
+    ],
   },
   {
     title: 'Get pre-approved',
     body: 'A pre-approval is a letter from a mortgage lender saying how much they are likely to lend you. It shows sellers you are a serious buyer and sets your price range before you start touring homes.',
+    links: [{ href: '/how-much-house-can-i-afford-idaho', label: 'How preapproval works' }],
   },
   {
     title: 'Search and tour homes',
     body: `List your must-haves and nice-to-haves for a home, then tour homes with ${agent}, who points out what to look for beyond the staging.`,
+    links: [{ href: '/first-time-buyer-areas-southeast-idaho', label: 'Compare towns near Idaho Falls' }],
   },
   {
     title: 'Make an offer',
@@ -30,38 +36,17 @@ const steps = [
   {
     title: 'Inspection and appraisal',
     body: `After the seller accepts your offer, a home inspection and the lender’s appraisal check the home’s condition and value. You can negotiate repairs based on what the inspection finds.`,
+    links: [{ href: '/closing-costs-and-inspection-idaho', label: 'Closing costs, inspection, and appraisal explained' }],
   },
   {
     title: 'Close and get your keys',
     body: 'At closing, you sign the final paperwork at the title company and bring your closing funds. After that, the home is yours and you get the keys.',
+    links: [{ href: '/closing-costs-and-inspection-idaho', label: 'What happens from accepted offer to closing day' }],
   },
 ]
 
-// Minimum down payment by loan type, shown as a table inside the down payment FAQ.
-const downPaymentRows = [
-  {
-    loan: 'Conventional',
-    down: 'As low as 3% for eligible buyers (20% avoids mortgage insurance)',
-    note: 'Mortgage insurance is typically required with less than 20% down',
-  },
-  {
-    loan: 'FHA',
-    down: '3.5%',
-    note: 'HUD says FHA loans are a good option for first-time buyers',
-  },
-  {
-    loan: 'VA',
-    down: '0%',
-    note: 'For eligible veterans and service members',
-  },
-  {
-    loan: 'USDA',
-    down: '0%',
-    note: 'For eligible homes in qualifying rural areas',
-  },
-]
-
-// Each answer is a list of blocks: { text, lead? }, { table: true }, or { note: true, text }.
+// Each answer is a list of blocks: { text, lead?, sources? } or { note: true, text }. An answer can also
+// carry `more`, a link to the deeper page that owns the topic.
 // Every answer names its subject, so it makes sense even if read without the rest of the page.
 const faqs = [
   {
@@ -75,47 +60,36 @@ const faqs = [
   {
     q: 'How much do I need for a down payment when buying my first home in Idaho?',
     blocks: [
-      { text: 'The down payment depends on the type of loan you choose.' },
       {
-        lead: 'Conventional loans:',
-        text: `A conventional loan is a mortgage that isn’t backed by the government. The traditional down payment is 20%, which also lets you avoid private mortgage insurance (PMI), an extra monthly cost that protects the lender. Eligible buyers can put down as little as 3% through Fannie Mae’s HomeReady and standard 97% loans and Freddie Mac’s Home Possible. With less than 20% down, mortgage insurance is typically required. Eligibility varies by program. HomeReady requires a credit score of 620, HomeReady and Home Possible limit household income to 80% of the area median, Fannie Mae’s standard 3% down loan needs at least one first-time buyer, and homeownership education can be required when every borrower is a first-time buyer. The home must be a one-unit primary residence.`,
-        sources: [SRC.fannieHomeReady, SRC.fannie97, SRC.freddieHomePossible, SRC.cfpbMortgageInsurance],
-      },
-      {
-        lead: 'Other loan options:',
-        text: 'FHA loans can start at 3.5% down, and FHA mortgage insurance is required on every FHA loan. VA loans (for eligible veterans and service members) and USDA loans (for eligible homes in qualifying rural areas) can require 0% down.',
-        sources: [SRC.hudFha, SRC.cfpbMortgageInsurance, SRC.vaPurchase, SRC.usdaGuaranteed],
-      },
-      { table: true },
-      {
-        lead: 'Other costs:',
-        text: 'A down payment is only part of the cash you need. You should also plan for closing costs and a home inspection.',
-      },
-      {
-        text: `A mortgage lender can tell you which loan and down payment fit your situation. ${agent} can help you plan the rest of the buying process.`,
+        text: 'It depends on the loan. Eligible buyers can put down as little as 3% on a conventional loan (20% avoids mortgage insurance), FHA loans can start at 3.5%, and VA and USDA loans can require 0% down for eligible buyers. Idaho Housing also offers down payment assistance of up to 8% of the sales price. Plan for closing costs and a home inspection on top of the down payment.',
+        sources: [SRC.fannieHomeReady, SRC.hudFha, SRC.vaPurchase, SRC.usdaGuaranteed, SRC.idahoHousingDpa],
       },
       {
         note: true,
         text: `${agent} is not a lender. Loan requirements vary by lender, so confirm the details with a mortgage lender.`,
       },
     ],
+    more: {
+      href: '/first-time-buyer-loans-idaho',
+      label: 'Compare loan types, requirements, and down payment assistance',
+    },
   },
   {
     q: 'What are closing costs and the home inspection when buying a home in Idaho?',
     blocks: [
       {
-        text: 'Closing costs are the fees you pay to finish the purchase, separate from your down payment. The Consumer Financial Protection Bureau groups them into lender charges, optional points that lower your rate, required third-party services such as the appraisal and title insurance, local government fees, and prepaid items and deposits such as interest, the first year of homeowners insurance, and starting escrow deposits for property taxes and insurance.',
+        text: 'Closing costs are the fees you pay to finish the purchase, separate from your down payment, such as lender charges, the appraisal, title insurance, and prepaid items. The home inspection and real estate agent fees are not required by the mortgage, so the CFPB lists them as other homebuying expenses.',
         sources: [SRC.cfpbClosingCosts],
-      },
-      {
-        text: `The home inspection and real estate agent fees are not required by the mortgage, so the CFPB lists them as other homebuying expenses. Your lender must give you a Loan Estimate within three business days of receiving your application, which shows estimated closing costs, the monthly payment, and the interest rate on a standard form, so you can compare lenders side by side. Bring yours to your consultation with ${agent}. Idaho Housing’s down payment assistance can go toward closing costs for eligible buyers.`,
-        sources: [SRC.cfpbClosingCosts, SRC.cfpbLoanEstimate, SRC.idahoHousingDpa],
       },
       {
         note: true,
         text: `${agent} is not a lender. Confirm closing cost details with a mortgage lender.`,
       },
     ],
+    more: {
+      href: '/closing-costs-and-inspection-idaho',
+      label: 'Closing costs, inspection, and appraisal explained',
+    },
   },
   {
     q: 'Do I need a real estate agent to buy a home, and what does it cost me?',
@@ -149,7 +123,7 @@ const faqSchema = {
     acceptedAnswer: {
       '@type': 'Answer',
       text: item.blocks
-        .filter((b) => b.text)
+        .filter((b) => b.text && !b.note)
         .map((b) => (b.lead ? `${b.lead} ${b.text}` : b.text))
         .join(' '),
     },
@@ -197,6 +171,15 @@ const faqSchema = {
               <div>
                 <h3 class="font-semibold text-stone-900">{step.title}</h3>
                 <p class="mt-1 text-stone-600">{step.body}</p>
+                {step.links && (
+                  <p class="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                    {step.links.map((l) => (
+                      <a href={l.href} class="font-medium text-gold-dark underline">
+                        {l.label} &rarr;
+                      </a>
+                    ))}
+                  </p>
+                )}
               </div>
             </li>
           ))
@@ -215,37 +198,7 @@ const faqSchema = {
           <div>
             <h3 class="font-semibold text-stone-900">{item.q}</h3>
             {item.blocks.map((block) =>
-              block.table ? (
-                <div class="mt-4 overflow-x-auto">
-                  <table class="w-full border-collapse text-left text-sm">
-                    <caption class="sr-only">Minimum down payment by loan type</caption>
-                    <thead class="bg-stone-100 text-stone-900">
-                      <tr>
-                        <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">
-                          Loan type
-                        </th>
-                        <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">
-                          Minimum down payment
-                        </th>
-                        <th scope="col" class="border border-stone-200 px-3 py-2 font-semibold">
-                          Good to know
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-stone-600">
-                      {downPaymentRows.map((row) => (
-                        <tr>
-                          <th scope="row" class="border border-stone-200 px-3 py-2 font-medium text-stone-900">
-                            {row.loan}
-                          </th>
-                          <td class="border border-stone-200 px-3 py-2">{row.down}</td>
-                          <td class="border border-stone-200 px-3 py-2">{row.note}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              ) : block.note ? (
+              block.note ? (
                 <p class="mt-3 text-sm text-stone-500">{block.text}</p>
               ) : (
                 <Fragment>
@@ -256,6 +209,13 @@ const faqSchema = {
                   {block.sources && <SourceLinks sources={block.sources} />}
                 </Fragment>
               )
+            )}
+            {item.more && (
+              <p class="mt-3 text-sm">
+                <a href={item.more.href} class="font-medium text-gold-dark underline">
+                  {item.more.label} &rarr;
+                </a>
+              </p>
             )}
           </div>
         ))
@@ -293,10 +253,19 @@ const faqSchema = {
         </li>
         <li>
           <a href="/my-plan" class="font-medium text-gold-dark underline">
-            Home buying calculator and readiness checklist
+            Home buying calculator and readiness checklist (free account)
           </a>
           <p class="mt-1 text-stone-600">
-            Estimate your monthly payment and see what to do before you buy.
+            Estimate your monthly payment and see what to do before you buy. You log in or create a
+            free account to use it.
+          </p>
+        </li>
+        <li>
+          <a href="/closing-costs-and-inspection-idaho" class="font-medium text-gold-dark underline">
+            Closing costs, inspection, and appraisal for first-time buyers
+          </a>
+          <p class="mt-1 text-stone-600">
+            What closing costs cover and what happens from accepted offer to closing day.
           </p>
         </li>
       </ul>
